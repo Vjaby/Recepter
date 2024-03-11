@@ -24,5 +24,42 @@ namespace src
 		{
 			InitializeComponent();
 		}
+
+		private void SaveButton_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("save");
+		}
+		private void OpenButton_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("open");
+		}
+
+		// Close, minimize, maximize buttons and draging
+		#region controls
+		private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			DragMove();
+		}
+
+		private void MinButton_Click(object sender, RoutedEventArgs e)
+		{
+			WindowState = WindowState.Minimized;
+		}
+
+		private void MaxButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (WindowState == WindowState.Maximized)
+			{
+				WindowState = WindowState.Normal;
+				return;
+			}
+			WindowState = WindowState.Maximized;
+		}
+
+		private void CloseButton_Click(object sender, RoutedEventArgs e)
+		{
+			Close();
+		}
+		#endregion
 	}
 }

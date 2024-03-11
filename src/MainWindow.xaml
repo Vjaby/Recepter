@@ -5,8 +5,102 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:src"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="ReceptApp" Height="500" Width="750"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Background="Gray"
+        Foreground="White"
+        FontFamily="Arial"
+        WindowStyle="None">
+    <!--colors: lightgreen, greenyellow, yellowgreen (maybe)-->
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="5, 0, 0, 0"/>
+            <Setter Property="Padding" Value="-2"/>
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style x:Key="ControlStyle" TargetType="Button">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <!--from https://gist.github.com/Snegovikufa/9131410-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="YellowGreen"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+
+        <!--Top row for buttons and control-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--Open, save... buttons-->
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Button x:Name="SaveButton" Content="Save" Click="SaveButton_Click"
+                    Style="{StaticResource ButtonStyle}"/>
+                <Button x:Name="OpenButton" Content="Open" Click="OpenButton_Click"
+                    Style="{StaticResource ButtonStyle}"/>
+            </StackPanel>
+            <!--control buttons-->
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="MinButton" Content="🗕" Style="{StaticResource ControlStyle}"
+                        Click="MinButton_Click"/>
+                <Button x:Name="MaxButton" Content="🗖" Style="{StaticResource ControlStyle}"
+                        Click="MaxButton_Click"/>
+                <Button x:Name="CloseButton" Content="✖" Style="{StaticResource ControlStyle}"
+                        Click="CloseButton_Click"/>
+            </StackPanel>
+        </Grid>
+
+
+        <!--main part: ingredients and steps-->
+        <!--Would also be nice to have "notes" somewhere (have a button for them?)-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+        </Grid>
+
+        <!--Tiny row for whatever (version...)-->
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBlock Margin="5, 0, 0, 0">Version 0.1</TextBlock>
+        </StackPanel>
     </Grid>
 </Window>
