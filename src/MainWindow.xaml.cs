@@ -25,15 +25,6 @@ namespace src
 			InitializeComponent();
 		}
 
-		private void SaveButton_Click(object sender, RoutedEventArgs e)
-		{
-			MessageBox.Show("save");
-		}
-		private void OpenButton_Click(object sender, RoutedEventArgs e)
-		{
-			MessageBox.Show("open");
-		}
-
 		// Close, minimize, maximize buttons and draging
 		#region controls
 		private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -61,5 +52,24 @@ namespace src
 			Close();
 		}
 		#endregion
+
+		private void SaveButton_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("save");
+		}
+		private void OpenButton_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("open");
+		}
+
+		private void NewButton_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("new");
+		}
+
+		private void SaveAsButton_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("saveAs");
+		}
 	}
 }
