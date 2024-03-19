@@ -23,6 +23,13 @@ namespace src
 		public MainWindow()
 		{
 			InitializeComponent();
+
+			List<Ingredient> ingredients = new List<Ingredient>
+			{
+				new Ingredient("potat", 10, "mg"),
+				new Ingredient("ham", 20, "kg")
+			};
+			IngredientsItemsControl.ItemsSource = ingredients;
 		}
 
 		// Close, minimize, maximize buttons and draging
@@ -72,4 +79,20 @@ namespace src
 			MessageBox.Show("saveAs");
 		}
 	}
+
+	public class Ingredient
+	{
+        public Ingredient(string name, int amount, string unit)
+        {
+            Name = name;
+			Amount = amount;
+			Unit = unit;
+
+        }
+
+        public string Name { get; set; }
+		public int Amount { get; set; }
+		public string Unit { get; set; }
+	}
+
 }

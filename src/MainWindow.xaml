@@ -69,6 +69,13 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="ItemStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="0, 0, 2, 0"/>
+        </Style>
     </Window.Resources>
 
     <Grid>
@@ -114,6 +121,30 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
+
+            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl x:Name="IngredientsItemsControl">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5, 5, 0, 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Text="{Binding Name}" Grid.Column="0"
+                                           Style="{StaticResource ItemStyle}"/>
+                                <TextBox Text="{Binding Amount}" Grid.Column="1"
+                                           Style="{StaticResource ItemStyle}"/>
+                                <TextBox Text="{Binding Unit}" Grid.Column="2"
+                                           Style="{StaticResource ItemStyle}"/>
+                                <Button Content="X" Grid.Column="3" Background="LightGreen"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
 
         </Grid>
 
