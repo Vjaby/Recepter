@@ -11,14 +11,16 @@
         Foreground="White"
         FontFamily="Arial"
         WindowStyle="None">
-    <!--colors: lightgreen, greenyellow, yellowgreen (maybe)-->
+    <!--colors: lightgreen, yellow (maybe)-->
 
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0"/>
     </WindowChrome.WindowChrome>
 
+
     <Window.Resources>
-        <Style x:Key="ButtonStyle" TargetType="Button">
+        <!--new, save... buttons-->
+        <Style x:Key="FileButtonStyle" TargetType="Button">
             <Setter Property="Height" Value="20"/>
             <Setter Property="Width" Value="60"/>
             <Setter Property="FontSize" Value="15"/>
@@ -38,7 +40,10 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="GreenYellow"/>
+                    <Setter Property="Background" Value="Yellow"/>
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Background" Value="Yellow"/>
                 </Trigger>
             </Style.Triggers>
             <Style.Resources>
@@ -48,7 +53,8 @@
             </Style.Resources>
         </Style>
 
-        <Style x:Key="ControlStyle" TargetType="Button">
+        <!--min, max, close buttons-->
+        <Style x:Key="ControlButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="30"/>
             <Setter Property="Height" Value="30"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -65,17 +71,66 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="YellowGreen"/>
+                    <Setter Property="Background" Value="Yellow"/>
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Background" Value="Yellow"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="ItemStyle" TargetType="TextBox">
+        <!--delete buttons next to items-->
+        <Style x:Key="DeleteButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="Content" Value="X"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Yellow"/>
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Background" Value="Yellow"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <!--textboxes-->
+        <Style x:Key="ItemTextBoxStyle" TargetType="TextBox">
             <Setter Property="Background" Value="LightGreen"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Margin" Value="0, 0, 2, 0"/>
+            <!--https://stackoverflow.com/questions/42013899/change-the-focused-border-color-of-a-wpf-textbox-when-it-gotfocus-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="Yellow"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="Yellow"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
+        
     </Window.Resources>
 
     <Grid>
@@ -94,21 +149,21 @@
             <!--Open, save... buttons-->
             <StackPanel Grid.Column="0" Orientation="Horizontal">
                 <Button x:Name="NewButton" Content="New" Click="NewButton_Click"
-                        Style="{StaticResource ButtonStyle}"/>
+                        Style="{StaticResource FileButtonStyle}"/>
                 <Button x:Name="SaveButton" Content="Save" Click="SaveButton_Click"
-                        Style="{StaticResource ButtonStyle}"/>
+                        Style="{StaticResource FileButtonStyle}"/>
                 <Button x:Name="SaveAsButton" Content="Save As" Click="SaveAsButton_Click"
-                        Style="{StaticResource ButtonStyle}"/>
+                        Style="{StaticResource FileButtonStyle}"/>
                 <Button x:Name="OpenButton" Content="Open" Click="OpenButton_Click"
-                        Style="{StaticResource ButtonStyle}"/>
+                        Style="{StaticResource FileButtonStyle}"/>
             </StackPanel>
             <!--control buttons-->
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="MinButton" Content="🗕" Style="{StaticResource ControlStyle}"
+                <Button x:Name="MinButton" Content="🗕" Style="{StaticResource ControlButtonStyle}"
                         Click="MinButton_Click"/>
-                <Button x:Name="MaxButton" Content="🗖" Style="{StaticResource ControlStyle}"
+                <Button x:Name="MaxButton" Content="🗖" Style="{StaticResource ControlButtonStyle}"
                         Click="MaxButton_Click"/>
-                <Button x:Name="CloseButton" Content="✖" Style="{StaticResource ControlStyle}"
+                <Button x:Name="CloseButton" Content="✖" Style="{StaticResource ControlButtonStyle}"
                         Click="CloseButton_Click"/>
             </StackPanel>
         </Grid>
@@ -123,7 +178,7 @@
             </Grid.ColumnDefinitions>
 
             <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                <ItemsControl x:Name="IngredientsItemsControl">
+                <ItemsControl x:Name="IngredientsItemsControl" Focusable="False">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="5, 5, 0, 0">
@@ -134,12 +189,13 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBox Text="{Binding Name}" Grid.Column="0"
-                                           Style="{StaticResource ItemStyle}"/>
+                                           Style="{StaticResource ItemTextBoxStyle}"/>
                                 <TextBox Text="{Binding Amount}" Grid.Column="1"
-                                           Style="{StaticResource ItemStyle}"/>
+                                           Style="{StaticResource ItemTextBoxStyle}"/>
                                 <TextBox Text="{Binding Unit}" Grid.Column="2"
-                                           Style="{StaticResource ItemStyle}"/>
-                                <Button Content="X" Grid.Column="3" Background="LightGreen"/>
+                                           Style="{StaticResource ItemTextBoxStyle}"/>
+                                <Button Grid.Column="3"
+                                           Style="{StaticResource DeleteButtonStyle}"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
