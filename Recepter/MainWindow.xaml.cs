@@ -30,6 +30,20 @@ namespace Recepter
 				new Ingredient("ham", 20, "kg")
 			};
 			IngredientsItemsControl.ItemsSource = ingredients;
+
+			List<Step> steps = new List<Step>
+			{
+				new Step("do this"),
+				new Step("do that")
+			};
+			StepsItemsControl.ItemsSource = steps;
+
+			List<Note> notes = new List<Note>
+			{
+				new Note("Oh boy"),
+				new Note("Hmmmm")
+			};
+			NotesItemsControl.ItemsSource = notes;
 		}
 
 		// Close, minimize, maximize buttons and draging
@@ -87,7 +101,6 @@ namespace Recepter
             Name = name;
 			Amount = amount;
 			Unit = unit;
-
         }
 
         public string Name { get; set; }
@@ -95,4 +108,24 @@ namespace Recepter
 		public string Unit { get; set; }
 	}
 
+	public class Step
+	{
+		public Step(string content)
+		{
+			Content = content;
+		}
+
+		public string Content { get; set; }
+
+	}
+
+	public class Note
+	{
+		public Note(string content)
+		{
+			Content = content;
+		}
+
+		public string Content { get; set; }
+	}
 }
