@@ -29,20 +29,20 @@ namespace Recepter
 				new Ingredient("potat", 10, "mg"),
 				new Ingredient("ham", 20, "kg")
 			};
-			IngredientsItemsControl.ItemsSource = ingredients;
 
 			List<Step> steps = new List<Step>
 			{
 				new Step("do this"),
 				new Step("do that")
 			};
-			StepsItemsControl.ItemsSource = steps;
 
 			List<Note> notes = new List<Note>
 			{
 				new Note("Oh boy"),
 				new Note("Hmmmm")
 			};
+			IngredientsItemsControl.ItemsSource = ingredients;
+			StepsItemsControl.ItemsSource = steps;
 			NotesItemsControl.ItemsSource = notes;
 		}
 
@@ -110,22 +110,22 @@ namespace Recepter
 
 	public class Step
 	{
-		public Step(string content)
+		public Step(string stepContent)
 		{
-			Content = content;
+			StepContent = stepContent;
 		}
 
-		public string Content { get; set; }
+		public string StepContent { get; set; }
 
 	}
 
 	public class Note
 	{
-		public Note(string content)
+		public Note(string noteContent)
 		{
-			Content = content;
+			NoteContent = noteContent;
 		}
 
-		public string Content { get; set; }
+		public string NoteContent { get; set; }
 	}
 }

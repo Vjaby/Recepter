@@ -11,7 +11,7 @@
         Foreground="White"
         FontFamily="Arial"
         WindowStyle="None">
-    <!--colors: lightgreen, yellow (maybe)-->
+    <!--colors: lightgreen, yellow-->
 
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0"/>
@@ -219,7 +219,7 @@
                                         <ColumnDefinition Width="6*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Text="{Binding Content}" Grid.Column="0"
+                                    <TextBox Text="{Binding StepContent}" Grid.Column="0"
                                Style="{StaticResource ItemTextBoxStyle}"/>
                                     <Button Grid.Column="1"
                                Style="{StaticResource DeleteButtonStyle}"/>
@@ -238,7 +238,7 @@
                                         <ColumnDefinition Width="6*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Text="{Binding Content}" Grid.Column="0"
+                                    <TextBox Text="{Binding NoteContent}" Grid.Column="0"
                                Style="{StaticResource ItemTextBoxStyle}"/>
                                     <Button Grid.Column="1"
                                Style="{StaticResource DeleteButtonStyle}"/>
