@@ -32,8 +32,9 @@ namespace Recepter
 
 			List<Step> steps = new List<Step>
 			{
-				new Step("do this"),
-				new Step("do that")
+				new Step(1, "do this"),
+				new Step(2, "do that"),
+				new Step(10, "be there")
 			};
 
 			List<Note> notes = new List<Note>
@@ -110,11 +111,13 @@ namespace Recepter
 
 	public class Step
 	{
-		public Step(string stepContent)
+		public Step(int stepNumber, string stepContent)
 		{
+			StepNumber = stepNumber;
 			StepContent = stepContent;
 		}
 
+		public int StepNumber { get; set; }
 		public string StepContent { get; set; }
 
 	}
