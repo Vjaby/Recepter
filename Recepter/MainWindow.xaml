@@ -73,7 +73,7 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="Yellow"/>
                 </Trigger>
-                <Trigger Property="IsFocused" Value="True">
+                <Trigger Property="IsKeyboardFocused" Value="True">
                     <Setter Property="Background" Value="Yellow"/>
                 </Trigger>
             </Style.Triggers>
@@ -101,7 +101,30 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
+        <!--add new buttons next to items-->
+        <Style x:Key="AddButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="Margin" Value="0,5,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Yellow"/>
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Background" Value="Yellow"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <!--textboxes-->
         <Style x:Key="ItemTextBoxStyle" TargetType="TextBox">
             <Setter Property="Background" Value="LightGreen"/>
@@ -130,10 +153,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
     </Window.Resources>
 
-    <Grid>
+    <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
@@ -179,77 +201,89 @@
             <!--Ingredients-->
             <Border Grid.Column="0" BorderBrush="Yellow" BorderThickness="0, 0, 1, 0" Padding="0, 0, 5, 0">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <ItemsControl x:Name="IngredientsItemsControl" Focusable="False">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="5, 5, 0, 0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="4*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox Text="{Binding Name}" Grid.Column="0"
+                    <StackPanel Orientation="Vertical">
+                        <ItemsControl x:Name="IngredientsItemsControl" Focusable="False">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0, 5, 0, 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="4*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Text="{Binding Name}" Grid.Column="0"
                                            Style="{StaticResource ItemTextBoxStyle}"/>
-                                    <TextBox Text="{Binding Amount}" Grid.Column="1"
+                                        <TextBox Text="{Binding Amount}" Grid.Column="1"
                                            Style="{StaticResource ItemTextBoxStyle}"/>
-                                    <TextBox Text="{Binding Unit}" Grid.Column="2"
+                                        <TextBox Text="{Binding Unit}" Grid.Column="2"
                                            Style="{StaticResource ItemTextBoxStyle}"/>
-                                    <Button Grid.Column="3"
+                                        <Button Grid.Column="3"
                                            Style="{StaticResource DeleteButtonStyle}"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <Button x:Name="AddIngredientButton" Style="{StaticResource AddButtonStyle}" 
+                                Content="Add New Ingredient" Click="AddIngredientButton_Click"/>
+                    </StackPanel>
                 </ScrollViewer>
             </Border>
 
             <!--Steps and notes-->
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1"  Margin="5, 0, 0, 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <ItemsControl x:Name="StepsItemsControl" Focusable="False">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="5, 5, 0, 0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="20"/>
-                                        <ColumnDefinition Width="6*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label Content="{Binding StepNumber}" Foreground="White" Padding="2, 2, 0, 0"/>
-                                    <TextBox Grid.Column="1" Text="{Binding StepContent}" 
-                                                Style="{StaticResource ItemTextBoxStyle}"/>
-                                    <Button Grid.Column="2"
-                                                Style="{StaticResource DeleteButtonStyle}"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
-
-                <Border Grid.Row="1" BorderBrush="Yellow" BorderThickness="0, 1, 0, 0" Padding="0,0,0,5">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                        <ItemsControl x:Name="NotesItemsControl" Focusable="False">
+                    <StackPanel Orientation="Vertical">
+                        <ItemsControl x:Name="StepsItemsControl" Focusable="False">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Margin="5, 5, 0, 0">
+                                    <Grid Margin="0, 5, 0, 0">
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="6*"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBox Text="{Binding NoteContent}" Grid.Column="0"
-                               Style="{StaticResource ItemTextBoxStyle}"/>
-                                        <Button Grid.Column="1"
-                               Style="{StaticResource DeleteButtonStyle}"/>
+                                        <Label Content="{Binding StepNumber}" Foreground="White" Padding="2, 2, 0, 0"/>
+                                        <TextBox Grid.Column="1" Text="{Binding StepContent}" 
+                                                Style="{StaticResource ItemTextBoxStyle}"/>
+                                        <Button Grid.Column="2"
+                                                Style="{StaticResource DeleteButtonStyle}"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
+                        <Button x:Name="AddStepButton" Style="{StaticResource AddButtonStyle}" 
+                                Content="Add New Step" Click="AddStepButton_Click"/>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Border Grid.Row="1" BorderBrush="Yellow" BorderThickness="0, 1, 0, 0" Padding="0,0,0,5">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel Orientation="Vertical">
+                            <ItemsControl x:Name="NotesItemsControl" Focusable="False">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="0, 5, 0, 0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="6*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox Text="{Binding NoteContent}" Grid.Column="0"
+                               Style="{StaticResource ItemTextBoxStyle}"/>
+                                            <Button Grid.Column="1"
+                               Style="{StaticResource DeleteButtonStyle}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <Button x:Name="AddNoteButton" Style="{StaticResource AddButtonStyle}" 
+                                Content="Add New Note" Click="AddNoteButton_Click"/>
+                        </StackPanel>
                     </ScrollViewer>
                 </Border>
 

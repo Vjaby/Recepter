@@ -20,31 +20,31 @@ namespace Recepter
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		List<Ingredient> ingredients = new List<Ingredient>
+		{
+			new Ingredient("potat", 10, "mg"),
+			new Ingredient("ham", 20, "kg")
+		};
+
+		List<Step> steps = new List<Step>
+		{
+			new Step(1, "do this"),
+			new Step(2, "do that"),
+		};
+
+		List<Note> notes = new List<Note>
+		{
+			new Note("Oh boy"),
+			new Note("Hmmmm")
+		};
+
 		public MainWindow()
 		{
 			InitializeComponent();
-
-			List<Ingredient> ingredients = new List<Ingredient>
-			{
-				new Ingredient("potat", 10, "mg"),
-				new Ingredient("ham", 20, "kg")
-			};
-
-			List<Step> steps = new List<Step>
-			{
-				new Step(1, "do this"),
-				new Step(2, "do that"),
-				new Step(10, "be there")
-			};
-
-			List<Note> notes = new List<Note>
-			{
-				new Note("Oh boy"),
-				new Note("Hmmmm")
-			};
 			IngredientsItemsControl.ItemsSource = ingredients;
 			StepsItemsControl.ItemsSource = steps;
 			NotesItemsControl.ItemsSource = notes;
+
 		}
 
 		// Close, minimize, maximize buttons and draging
@@ -75,6 +75,7 @@ namespace Recepter
 		}
 		#endregion
 
+		#region File Buttons
 		private void SaveButton_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show("save");
@@ -92,6 +93,28 @@ namespace Recepter
 		private void SaveAsButton_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show("saveAs");
+		}
+		#endregion
+
+		private void AddIngredientButton_Click(object sender, RoutedEventArgs e)
+		{
+			ingredients.Add(new Ingredient("", 0, ""));
+			IngredientsItemsControl.ItemsSource = null;
+			IngredientsItemsControl.ItemsSource = ingredients; //if it works...
+		}
+
+		private void AddStepButton_Click(object sender, RoutedEventArgs e)
+		{
+			steps.Add(new Step(steps.Count + 1, ""));
+			StepsItemsControl.ItemsSource = null;
+			StepsItemsControl.ItemsSource = steps; //if it works...
+		}
+
+		private void AddNoteButton_Click(object sender, RoutedEventArgs e)
+		{
+			notes.Add(new Note(""));
+			NotesItemsControl.ItemsSource = null;
+			NotesItemsControl.ItemsSource = notes; //if it works...
 		}
 	}
 
@@ -113,7 +136,7 @@ namespace Recepter
 	{
 		public Step(int stepNumber, string stepContent)
 		{
-			StepNumber = stepNumber;
+			StepNumber = stepNumber; //this probably isnt the way
 			StepContent = stepContent;
 		}
 
