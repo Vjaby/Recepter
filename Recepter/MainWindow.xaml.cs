@@ -85,7 +85,37 @@ namespace Recepter {
             MessageBox.Show("save");
         }
         private void OpenButton_Click(object sender, RoutedEventArgs e) {
-            MessageBox.Show("open");
+            // CHECK FOR UNSAVED CHANGES
+
+            Recipe recipe = new Recipe();
+            XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
+
+            // I took this and did my best https://learn.microsoft.com/cs-cz/dotnet/api/system.windows.forms.savefiledialog?view=windowsdesktop-8.0
+            Stream stream = null;
+            OpenFileDialog openFileDialog = new OpenFileDialog {
+                Filter = "xml|*.xml"
+            };
+
+            if ((bool)openFileDialog.ShowDialog()) {
+                if ((stream = openFileDialog.OpenFile()) != null) {
+                    recipe = (Recipe)(serializer.Deserialize(stream));
+                    stream.Close();
+                }
+            }
+
+            stream.Dispose(); // maybe not needed especialy after "stream.Close() but just to be safe
+
+            Ingredients = recipe.Ingredients;
+            IngredientsItemsControl.ItemsSource = null;
+            IngredientsItemsControl.ItemsSource = Ingredients; //if it works...
+
+            Steps = recipe.Steps;
+            StepsItemsControl.ItemsSource = null;
+            StepsItemsControl.ItemsSource = Steps;
+
+            Notes = recipe.Notes;
+            NotesItemsControl.ItemsSource = null;
+            NotesItemsControl.ItemsSource = Notes; //if it works...
         }
 
         private void NewButton_Click(object sender, RoutedEventArgs e) {
@@ -93,7 +123,6 @@ namespace Recepter {
         }
 
         private void SaveAsButton_Click(object sender, RoutedEventArgs e) {
-
             Recipe recipe = new Recipe() {
                 Ingredients = Ingredients, // oh boy
                 Steps = Steps,
