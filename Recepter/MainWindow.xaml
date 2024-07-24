@@ -172,10 +172,8 @@
             <StackPanel Grid.Column="0" Orientation="Horizontal">
                 <Button x:Name="NewButton" Content="New" Click="NewButton_Click"
                         Style="{StaticResource FileButtonStyle}"/>
-                <!-- "quicksaving" will come later
                 <Button x:Name="SaveButton" Content="Save" Click="SaveButton_Click"
                         Style="{StaticResource FileButtonStyle}"/>
-                -->
                 <Button x:Name="SaveAsButton" Content="Save As" Click="SaveAsButton_Click"
                         Style="{StaticResource FileButtonStyle}"/>
                 <Button x:Name="OpenButton" Content="Open" Click="OpenButton_Click"

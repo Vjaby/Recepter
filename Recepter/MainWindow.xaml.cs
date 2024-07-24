@@ -15,15 +15,18 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Xml.Serialization;
 using Microsoft.Win32;
+using System.Windows.Interop;
+using System.Windows.Controls.Primitives;
 
 namespace Recepter {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        List<Ingredient> Ingredients = new List<Ingredient> { };
-        List<Step> Steps = new List<Step> { };
-        List<Note> Notes = new List<Note> { };
+        List<Ingredient> Ingredients = new List<Ingredient>();
+        List<Step> Steps = new List<Step>();
+        List<Note> Notes = new List<Note>();
+        Recipe SavedRecipe = new Recipe();
 
         public MainWindow() {
             InitializeComponent();
@@ -87,7 +90,6 @@ namespace Recepter {
         private void OpenButton_Click(object sender, RoutedEventArgs e) {
             // CHECK FOR UNSAVED CHANGES
 
-            Recipe recipe = new Recipe();
             XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
 
             // I took this and did my best https://learn.microsoft.com/cs-cz/dotnet/api/system.windows.forms.savefiledialog?view=windowsdesktop-8.0
@@ -98,28 +100,56 @@ namespace Recepter {
 
             if ((bool)openFileDialog.ShowDialog()) {
                 if ((stream = openFileDialog.OpenFile()) != null) {
-                    recipe = (Recipe)(serializer.Deserialize(stream));
+                    SavedRecipe = (Recipe)(serializer.Deserialize(stream));
                     stream.Close();
                 }
             }
 
             stream.Dispose(); // maybe not needed especialy after "stream.Close() but just to be safe
 
-            Ingredients = recipe.Ingredients;
-            IngredientsItemsControl.ItemsSource = null;
-            IngredientsItemsControl.ItemsSource = Ingredients; //if it works...
-
-            Steps = recipe.Steps;
-            StepsItemsControl.ItemsSource = null;
-            StepsItemsControl.ItemsSource = Steps;
-
-            Notes = recipe.Notes;
-            NotesItemsControl.ItemsSource = null;
-            NotesItemsControl.ItemsSource = Notes; //if it works...
+            Ingredients = SavedRecipe.Ingredients;
+            Steps = SavedRecipe.Steps;
+            Notes = SavedRecipe.Notes;
+            ResetItemsControl();
         }
 
         private void NewButton_Click(object sender, RoutedEventArgs e) {
-            MessageBox.Show("new");
+            Recipe recipe = new Recipe() { 
+                Ingredients = Ingredients, // oh boy
+                Steps = Steps,
+                Notes = Notes
+            };
+
+            if (SavedRecipe != recipe) //if the last saved recipe isnt the same as the recipe now...
+            {
+                var result = MessageBox.Show("Do you want to save this recipe?",
+                                             "UNSAVED CHANGES",
+                                             MessageBoxButton.YesNoCancel,
+                                             MessageBoxImage.Warning,
+                                             MessageBoxResult.Cancel);
+                if (result == MessageBoxResult.Yes)
+                {
+                    SaveButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                } 
+                else if (result == MessageBoxResult.Cancel)
+                {
+                    return;
+                }
+                //else result is no
+
+                Ingredients = new List<Ingredient> { new Ingredient() {
+                Name = "",
+                Amount = 0,
+                Unit = ""} };
+
+                Steps = new List<Step> { new Step() {
+                StepContent = "",
+                StepId = 1 } };
+
+                Notes = new List<Note> { new Note() { NoteContent = "" } };
+
+                ResetItemsControl();
+            }
         }
 
         private void SaveAsButton_Click(object sender, RoutedEventArgs e) {
@@ -144,6 +174,8 @@ namespace Recepter {
             }
 
             stream.Dispose(); // maybe not needed especialy after "stream.Close() but just to be safe
+
+            SavedRecipe = recipe;
         }
         #endregion
 
@@ -208,6 +240,16 @@ namespace Recepter {
             IngredientsItemsControl.ItemsSource = Ingredients;
         }
         #endregion
+
+        private void ResetItemsControl() {
+            IngredientsItemsControl.ItemsSource = null;
+            IngredientsItemsControl.ItemsSource = Ingredients;
+            StepsItemsControl.ItemsSource = null;
+            StepsItemsControl.ItemsSource = Steps;
+            NotesItemsControl.ItemsSource = null;
+            NotesItemsControl.ItemsSource = Notes;
+            //if it works...
+        }
     }
 
     public class Ingredient {
