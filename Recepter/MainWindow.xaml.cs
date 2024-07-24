@@ -57,6 +57,10 @@ namespace Recepter {
             IngredientsItemsControl.ItemsSource = Ingredients;
             StepsItemsControl.ItemsSource = Steps;
             NotesItemsControl.ItemsSource = Notes;
+
+            SavedRecipe.Ingredients = Ingredients;
+            SavedRecipe.Steps = Steps;
+            SavedRecipe.Notes = Notes;
         }
 
         // Close, minimize, maximize buttons and draging
@@ -120,7 +124,8 @@ namespace Recepter {
                 Notes = Notes
             };
 
-            if (SavedRecipe != recipe) //if the last saved recipe isnt the same as the recipe now...
+            // THIS SEEMS TO BE ALWAYS TRUE (false before negation)
+            if (!SavedRecipe.Equals(recipe)) //if the last saved recipe isnt the same as the recipe now...
             {
                 var result = MessageBox.Show("Do you want to save this recipe?",
                                              "UNSAVED CHANGES",
@@ -135,21 +140,25 @@ namespace Recepter {
                 {
                     return;
                 }
-                //else result is no
-
-                Ingredients = new List<Ingredient> { new Ingredient() {
-                Name = "",
-                Amount = 0,
-                Unit = ""} };
-
-                Steps = new List<Step> { new Step() {
-                StepContent = "",
-                StepId = 1 } };
-
-                Notes = new List<Note> { new Note() { NoteContent = "" } };
-
-                ResetItemsControl();
             }
+            /*
+            "You have unsaved changes. Wanna save?"
+            if yes, save
+            if cancel, STOP dont do anything
+            if no, "do whatever you wanted, dont let me stop you"
+            */
+
+            Ingredients.Clear();
+            Steps.Clear();
+            Notes.Clear();
+
+            ResetItemsControl();
+
+            SavedRecipe = new Recipe {
+                Ingredients = Ingredients,
+                Steps = Steps,
+                Notes = Notes
+            };
         }
 
         private void SaveAsButton_Click(object sender, RoutedEventArgs e) {
@@ -183,40 +192,28 @@ namespace Recepter {
         #region Add Buttons
         private void AddIngredientButton_Click(object sender, RoutedEventArgs e) {
             Ingredients.Add(new Ingredient());
-            IngredientsItemsControl.ItemsSource = null;
-            IngredientsItemsControl.ItemsSource = Ingredients; //if it works...
+            ResetItemsControl();
         }
 
         private void AddStepButton_Click(object sender, RoutedEventArgs e) {
             Steps.Add(new Step() { StepId = Steps.Count + 1});
-            StepsItemsControl.ItemsSource = null;
-            StepsItemsControl.ItemsSource = Steps; //if it works...
+            ResetItemsControl();
         }
 
         private void AddNoteButton_Click(object sender, RoutedEventArgs e) {
             Notes.Add(new Note());
-            NotesItemsControl.ItemsSource = null;
-            NotesItemsControl.ItemsSource = Notes; //if it works...
+            ResetItemsControl();
         }
         #endregion
 
         //deleting an ingredient, step, note
         #region Delete Buttons
         private void NoteDeleteButton_Click(object sender, RoutedEventArgs e) {
-            //I have never seen this syntax (though that isnt saying much)
-            //anyway, taken from here: https://stackoverflow.com/questions/16342885/access-other-xaml-controls-data-in-another-controls-event?rq=3
+            //inspiration here: https://stackoverflow.com/questions/16342885/access-other-xaml-controls-data-in-another-controls-event?rq=3
             Button btn = (Button)sender;
             Note btnDataContext = (Note)btn.DataContext;
-
-            /* a bit of history
-			at first I thought I would use RemoveAt for this, but then
-			this simpler thing came out at random out of IntelliSense/Code
-
-			just a reminder to thank our Microsoft overlords
-			*/
             Notes.Remove(btnDataContext);
-            NotesItemsControl.ItemsSource = null;
-            NotesItemsControl.ItemsSource = Notes;
+            ResetItemsControl();
         }
 
         private void StepDeleteButton_Click(object sender, RoutedEventArgs e) {
@@ -227,8 +224,7 @@ namespace Recepter {
             for (int i = 0; i < Steps.Count(); i++) {
                 Steps[i].StepId = i + 1;
             }
-            StepsItemsControl.ItemsSource = null;
-            StepsItemsControl.ItemsSource = Steps;
+            ResetItemsControl();
         }
 
         private void IngredientDeleteButton_Click(object sender, RoutedEventArgs e) {
@@ -236,11 +232,14 @@ namespace Recepter {
             Ingredient btnDataContext = (Ingredient)btn.DataContext;
 
             Ingredients.Remove(btnDataContext);
-            IngredientsItemsControl.ItemsSource = null;
-            IngredientsItemsControl.ItemsSource = Ingredients;
+            ResetItemsControl();
         }
         #endregion
 
+        /*
+        Makes sure the ItemsControls are showing, what their supposed to
+        especialy after adding or deleting
+        */
         private void ResetItemsControl() {
             IngredientsItemsControl.ItemsSource = null;
             IngredientsItemsControl.ItemsSource = Ingredients;
