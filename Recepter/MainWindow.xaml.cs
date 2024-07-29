@@ -92,7 +92,9 @@ namespace Recepter {
             MessageBox.Show("save");
         }
         private void OpenButton_Click(object sender, RoutedEventArgs e) {
-            // CHECK FOR UNSAVED CHANGES
+            if (IsUnsaved()) {
+                return;
+            }
 
             XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
 
@@ -118,35 +120,10 @@ namespace Recepter {
         }
 
         private void NewButton_Click(object sender, RoutedEventArgs e) {
-            Recipe recipe = new Recipe() { 
-                Ingredients = Ingredients, // oh boy
-                Steps = Steps,
-                Notes = Notes
-            };
 
-            // THIS SEEMS TO BE ALWAYS TRUE (false before negation)
-            if (!SavedRecipe.Equals(recipe)) //if the last saved recipe isnt the same as the recipe now...
-            {
-                var result = MessageBox.Show("Do you want to save this recipe?",
-                                             "UNSAVED CHANGES",
-                                             MessageBoxButton.YesNoCancel,
-                                             MessageBoxImage.Warning,
-                                             MessageBoxResult.Cancel);
-                if (result == MessageBoxResult.Yes)
-                {
-                    SaveButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-                } 
-                else if (result == MessageBoxResult.Cancel)
-                {
-                    return;
-                }
+            if (IsUnsaved()) {
+                return;
             }
-            /*
-            "You have unsaved changes. Wanna save?"
-            if yes, save
-            if cancel, STOP dont do anything
-            if no, "do whatever you wanted, dont let me stop you"
-            */
 
             Ingredients.Clear();
             Steps.Clear();
@@ -248,6 +225,41 @@ namespace Recepter {
             NotesItemsControl.ItemsSource = null;
             NotesItemsControl.ItemsSource = Notes;
             //if it works...
+        }
+
+        /*
+         chcecks for unsaved changes
+         if the curent recipe is the same as the last "SavedRecipe" -> false
+         if not -> ask "wanna save?" -> yes -> save -> false
+                                     -> no -> false
+                                     -> cancel -> true
+         false is like saying "go ahead"
+         true is like saying "stop! I still have work to do"
+         */
+        private bool IsUnsaved() {
+            Recipe recipe = new Recipe() {
+                Ingredients = Ingredients, // oh boy
+                Steps = Steps,
+                Notes = Notes
+            };
+
+            //if the last saved recipe isnt the same as the recipe now...
+            if (SavedRecipe != recipe) /* ****DOESNT WORK, IS ALWAYS TRUE**** */
+            {
+                var result = MessageBox.Show("Do you want to save this recipe?",
+                                             "UNSAVED CHANGES",
+                                             MessageBoxButton.YesNoCancel,
+                                             MessageBoxImage.Warning,
+                                             MessageBoxResult.Cancel);
+                if (result == MessageBoxResult.Yes) {
+                    SaveButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent)); //click on the save button
+                    return false;
+                }
+                else if (result == MessageBoxResult.No) {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 
