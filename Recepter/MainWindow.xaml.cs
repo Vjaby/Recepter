@@ -58,9 +58,9 @@ namespace Recepter {
             StepsItemsControl.ItemsSource = Steps;
             NotesItemsControl.ItemsSource = Notes;
 
-            SavedRecipe.Ingredients = Ingredients;
-            SavedRecipe.Steps = Steps;
-            SavedRecipe.Notes = Notes;
+            SavedRecipe.Ingredients = Ingredients.ToList();
+            SavedRecipe.Steps = Steps.ToList();
+            SavedRecipe.Notes = Notes.ToList();
         }
 
         // Close, minimize, maximize buttons and draging
@@ -113,9 +113,9 @@ namespace Recepter {
 
             stream.Dispose(); // maybe not needed especialy after "stream.Close() but just to be safe
 
-            Ingredients = SavedRecipe.Ingredients;
-            Steps = SavedRecipe.Steps;
-            Notes = SavedRecipe.Notes;
+            Ingredients = SavedRecipe.Ingredients.ToList();
+            Steps = SavedRecipe.Steps.ToList();
+            Notes = SavedRecipe.Notes.ToList();
             ResetItemsControl();
         }
 
@@ -132,17 +132,17 @@ namespace Recepter {
             ResetItemsControl();
 
             SavedRecipe = new Recipe {
-                Ingredients = Ingredients,
-                Steps = Steps,
-                Notes = Notes
+                Ingredients = Ingredients.ToList(),
+                Steps = Steps.ToList(),
+                Notes = Notes.ToList()
             };
         }
 
         private void SaveAsButton_Click(object sender, RoutedEventArgs e) {
             Recipe recipe = new Recipe() {
-                Ingredients = Ingredients, // oh boy
-                Steps = Steps,
-                Notes = Notes
+                Ingredients = Ingredients.ToList(), // oh boy
+                Steps = Steps.ToList(),
+                Notes = Notes.ToList()
             };
             XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
 
@@ -227,7 +227,7 @@ namespace Recepter {
             //if it works...
         }
 
-        /*
+         /*
          chcecks for unsaved changes
          if the curent recipe is the same as the last "SavedRecipe" -> false
          if not -> ask "wanna save?" -> yes -> save -> false
@@ -237,14 +237,31 @@ namespace Recepter {
          true is like saying "stop! I still have work to do"
          */
         private bool IsUnsaved() {
+            string recipeString;
+            string savedRecipeString;
+
             Recipe recipe = new Recipe() {
-                Ingredients = Ingredients, // oh boy
-                Steps = Steps,
-                Notes = Notes
+                Ingredients = Ingredients.ToList(), // oh boy
+                Steps = Steps.ToList(),
+                Notes = Notes.ToList()
             };
 
+            /*
+            create strings out of the recipe and SavedRecipe objects and comapre those
+            because .Equals (or ==) doesn't work (because of complex objects (i guess))
+            */
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Recipe));
+            using (StringWriter textWriter = new StringWriter()) {
+                xmlSerializer.Serialize(textWriter, recipe);
+                recipeString = textWriter.ToString();
+            }
+            using (StringWriter textWriter = new StringWriter()) {
+                xmlSerializer.Serialize(textWriter, SavedRecipe);
+                savedRecipeString = textWriter.ToString();
+            }
+
             //if the last saved recipe isnt the same as the recipe now...
-            if (SavedRecipe != recipe) /* ****DOESNT WORK, IS ALWAYS TRUE**** */
+            if (savedRecipeString != recipeString)
             {
                 var result = MessageBox.Show("Do you want to save this recipe?",
                                              "UNSAVED CHANGES",
@@ -258,8 +275,12 @@ namespace Recepter {
                 else if (result == MessageBoxResult.No) {
                     return false;
                 }
+                else {
+                    return true;
+                }
+            } else {
+                return false;
             }
-            return true;
         }
     }
 
