@@ -165,7 +165,7 @@
         <!--Top row for buttons and control-->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!--Open, save... buttons-->
@@ -291,8 +291,18 @@
         </Grid>
 
         <!--Tiny row for whatever (version...)-->
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <TextBlock Margin="5, 0, 0, 0">Version 0.1</TextBlock>
-        </StackPanel>
+        <Grid Grid.Row="2" Margin="5, 0, 5, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0">
+                Version 0.1</TextBlock>
+            <TextBox Grid.Column="1" Text="New Recipe"
+                     Style="{StaticResource ItemTextBoxStyle}"
+                     Width="200" HorizontalAlignment="Right"
+                     x:Name="NameTextBox"/>
+        </Grid>
     </Grid>
 </Window>

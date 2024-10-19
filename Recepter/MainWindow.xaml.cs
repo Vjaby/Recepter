@@ -91,6 +91,7 @@ namespace Recepter {
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
             MessageBox.Show("save");
         }
+
         private void OpenButton_Click(object sender, RoutedEventArgs e) {
             if (IsUnsaved()) {
                 return;
@@ -99,7 +100,7 @@ namespace Recepter {
             XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
 
             // I took this and did my best https://learn.microsoft.com/cs-cz/dotnet/api/system.windows.forms.savefiledialog?view=windowsdesktop-8.0
-            Stream stream = null;
+            Stream stream;
             OpenFileDialog openFileDialog = new OpenFileDialog {
                 Filter = "xml|*.xml"
             };
@@ -107,16 +108,17 @@ namespace Recepter {
             if ((bool)openFileDialog.ShowDialog()) {
                 if ((stream = openFileDialog.OpenFile()) != null) {
                     SavedRecipe = (Recipe)(serializer.Deserialize(stream));
+
+                    Ingredients = SavedRecipe.Ingredients.ToList();
+                    Steps = SavedRecipe.Steps.ToList();
+                    Notes = SavedRecipe.Notes.ToList();
+                    NameTextBox.Text = (openFileDialog.SafeFileName).Replace(".xml", "");
+
+                    ResetItemsControl();
                     stream.Close();
                 }
             }
 
-            stream.Dispose(); // maybe not needed especialy after "stream.Close() but just to be safe
-
-            Ingredients = SavedRecipe.Ingredients.ToList();
-            Steps = SavedRecipe.Steps.ToList();
-            Notes = SavedRecipe.Notes.ToList();
-            ResetItemsControl();
         }
 
         private void NewButton_Click(object sender, RoutedEventArgs e) {
@@ -128,6 +130,7 @@ namespace Recepter {
             Ingredients.Clear();
             Steps.Clear();
             Notes.Clear();
+            NameTextBox.Text = "New Recipe";
 
             ResetItemsControl();
 
@@ -139,29 +142,30 @@ namespace Recepter {
         }
 
         private void SaveAsButton_Click(object sender, RoutedEventArgs e) {
-            Recipe recipe = new Recipe() {
-                Ingredients = Ingredients.ToList(), // oh boy
-                Steps = Steps.ToList(),
-                Notes = Notes.ToList()
-            };
-            XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
-
             // I took this and did my best https://learn.microsoft.com/cs-cz/dotnet/api/system.windows.forms.savefiledialog?view=windowsdesktop-8.0
-            Stream stream = null;
+            Stream stream;
             SaveFileDialog saveFileDialog = new SaveFileDialog {
-                Filter = "xml|*.xml"
+                Filter = "xml|*.xml",
+                FileName = NameTextBox.Text
             };
 
             if ((bool)saveFileDialog.ShowDialog()) {
                 if ((stream = saveFileDialog.OpenFile()) != null) {
+                    Recipe recipe = new Recipe() {
+                        Ingredients = Ingredients.ToList(), // oh boy
+                        Steps = Steps.ToList(),
+                        Notes = Notes.ToList()
+                    };
+                    XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
+
                     serializer.Serialize(stream, recipe);
                     stream.Close();
+
+                    SavedRecipe = recipe;
                 }
             }
 
-            stream.Dispose(); // maybe not needed especialy after "stream.Close() but just to be safe
 
-            SavedRecipe = recipe;
         }
         #endregion
 
@@ -214,7 +218,7 @@ namespace Recepter {
         #endregion
 
         /*
-        Makes sure the ItemsControls are showing, what their supposed to
+        Makes sure the ItemsControls are showing what their supposed to
         especialy after adding or deleting
         */
         private void ResetItemsControl() {
