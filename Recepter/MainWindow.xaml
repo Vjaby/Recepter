@@ -10,7 +10,8 @@
         Background="Gray"
         Foreground="White"
         FontFamily="Arial"
-        WindowStyle="None">
+        WindowStyle="None"
+        MinWidth="500" MinHeight="300">
     <!--colors: lightgreen, yellow-->
 
     <WindowChrome.WindowChrome>

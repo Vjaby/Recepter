@@ -27,6 +27,7 @@ namespace Recepter {
         List<Step> Steps = new List<Step>();
         List<Note> Notes = new List<Note>();
         Recipe SavedRecipe = new Recipe();
+        string SavedPath = "";
 
         public MainWindow() {
             InitializeComponent();
@@ -88,16 +89,45 @@ namespace Recepter {
 
         //Save, open, new file
         #region File Buttons
+
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
-            MessageBox.Show("save");
+            /*
+            if you opend or "save as-ed", made some changes and now want to "save", it should just save (duh)
+            if you click on "save" and you're NOT working on an already existing recipe, it should do "save as"
+
+            if SavedPath is empty -> save as
+            else check if SavedPath exists if yes -> save
+                                           if not -> save as
+            */
+            if (File.Exists(SavedPath) && NameTextBox.Text == System.IO.Path.GetFileName(SavedPath).Replace(".xml", ""))
+            {
+                Stream stream = File.OpenWrite(SavedPath);
+
+                // this check maybe dosn't need to happen since we already checked File.Exists
+                if (stream != null) {
+                    Recipe recipe = new Recipe() {
+                        Ingredients = Ingredients.ToList(), // oh boy
+                        Steps = Steps.ToList(),
+                        Notes = Notes.ToList()
+                    };
+                    XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
+
+                    serializer.Serialize(stream, recipe);
+                    stream.Close();
+
+                    SavedRecipe = recipe;
+                }
+            }
+            else
+            {
+                SaveAsButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent)); //click on the save as button
+            }
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e) {
             if (IsUnsaved()) {
                 return;
             }
-
-            XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
 
             // I took this and did my best https://learn.microsoft.com/cs-cz/dotnet/api/system.windows.forms.savefiledialog?view=windowsdesktop-8.0
             Stream stream;
@@ -107,22 +137,22 @@ namespace Recepter {
 
             if ((bool)openFileDialog.ShowDialog()) {
                 if ((stream = openFileDialog.OpenFile()) != null) {
+                    XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
                     SavedRecipe = (Recipe)(serializer.Deserialize(stream));
 
                     Ingredients = SavedRecipe.Ingredients.ToList();
                     Steps = SavedRecipe.Steps.ToList();
                     Notes = SavedRecipe.Notes.ToList();
                     NameTextBox.Text = (openFileDialog.SafeFileName).Replace(".xml", "");
+                    SavedPath = openFileDialog.FileName;
 
                     ResetItemsControl();
                     stream.Close();
                 }
             }
-
         }
 
         private void NewButton_Click(object sender, RoutedEventArgs e) {
-
             if (IsUnsaved()) {
                 return;
             }
@@ -139,6 +169,7 @@ namespace Recepter {
                 Steps = Steps.ToList(),
                 Notes = Notes.ToList()
             };
+            SavedPath = "";
         }
 
         private void SaveAsButton_Click(object sender, RoutedEventArgs e) {
@@ -162,10 +193,10 @@ namespace Recepter {
                     stream.Close();
 
                     SavedRecipe = recipe;
+                    NameTextBox.Text = (saveFileDialog.SafeFileName).Replace(".xml", "");
+                    SavedPath = saveFileDialog.FileName;
                 }
             }
-
-
         }
         #endregion
 
@@ -282,7 +313,8 @@ namespace Recepter {
                 else {
                     return true;
                 }
-            } else {
+            }
+            else {
                 return false;
             }
         }
