@@ -5,14 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Recepter"
         mc:Ignorable="d"
-        Title="ReceptApp" Height="500" Width="750"
+        Title="Receper" Height="500" Width="750"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        Background="Gray"
-        Foreground="White"
+        Background="Bisque"
+        Foreground="Olive"
         FontFamily="Arial"
         WindowStyle="None"
         MinWidth="500" MinHeight="300">
-    <!--colors: lightgreen, yellow-->
+    <!--
+    colors: 
+    button, textbox background: Olive
+    focused, borders: Orange
+    window background: Bisque
+    -->
 
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0"/>
@@ -27,8 +32,8 @@
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Margin" Value="5, 0, 0, 0"/>
             <Setter Property="Padding" Value="-2"/>
-            <Setter Property="Background" Value="LightGreen"/>
-            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="Olive"/>
+            <Setter Property="Foreground" Value="Bisque"/>
             <!--from https://gist.github.com/Snegovikufa/9131410-->
             <Setter Property="Template">
                 <Setter.Value>
@@ -41,10 +46,12 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Yellow"/>
+                    <Setter Property="Background" Value="Orange"/>
+                    <Setter Property="Foreground" Value="Olive"/>
                 </Trigger>
                 <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="Background" Value="Yellow"/>
+                    <Setter Property="Background" Value="Orange"/>
+                    <Setter Property="Foreground" Value="Olive"/>
                 </Trigger>
             </Style.Triggers>
             <Style.Resources>
@@ -60,6 +67,7 @@
             <Setter Property="Height" Value="30"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Olive"/>
             <!--from https://gist.github.com/Snegovikufa/9131410-->
             <Setter Property="Template">
                 <Setter.Value>
@@ -72,17 +80,20 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Yellow"/>
+                    <Setter Property="Background" Value="Orange"/>
+                    <Setter Property="Foreground" Value="Olive"/>
                 </Trigger>
                 <Trigger Property="IsKeyboardFocused" Value="True">
-                    <Setter Property="Background" Value="Yellow"/>
+                    <Setter Property="Background" Value="Orange"/>
+                    <Setter Property="Foreground" Value="Olive"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
 
         <!--delete buttons next to items-->
         <Style x:Key="DeleteButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="Background" Value="Olive"/>
+            <Setter Property="Foreground" Value="Bisque"/>
             <Setter Property="Content" Value="X"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -95,17 +106,20 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Yellow"/>
+                    <Setter Property="Background" Value="Orange"/>
+                    <Setter Property="Foreground" Value="Olive"/>
                 </Trigger>
                 <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="Background" Value="Yellow"/>
+                    <Setter Property="Background" Value="Orange"/>
+                    <Setter Property="Foreground" Value="Olive"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
 
         <!--add new buttons next to items-->
         <Style x:Key="AddButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="Background" Value="Olive"/>
+            <Setter Property="Foreground" Value="Bisque"/>
             <Setter Property="Margin" Value="0,5,0,0"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -118,18 +132,21 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Yellow"/>
+                    <Setter Property="Background" Value="Orange"/>
+                    <Setter Property="Foreground" Value="Olive"/>
                 </Trigger>
                 <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="Background" Value="Yellow"/>
+                    <Setter Property="Background" Value="Orange"/>
+                    <Setter Property="Foreground" Value="Olive"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
 
         <!--textboxes-->
         <Style x:Key="ItemTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Background" Value="LightGreen"/>
-            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Background" Value="Olive"/>
+            <Setter Property="BorderBrush" Value="Bisque"/>
+            <Setter Property="Foreground" Value="Bisque"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Margin" Value="0, 0, 2, 0"/>
             <!--https://stackoverflow.com/questions/42013899/change-the-focused-border-color-of-a-wpf-textbox-when-it-gotfocus-->
@@ -144,10 +161,10 @@
                                 <Setter Property="Opacity" TargetName="border" Value="0.56"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="Yellow"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="Orange"/>
                             </Trigger>
                             <Trigger Property="IsFocused" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="Yellow"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="Orange"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -200,7 +217,7 @@
             </Grid.ColumnDefinitions>
 
             <!--Ingredients-->
-            <Border Grid.Column="0" BorderBrush="Yellow" BorderThickness="0, 0, 1, 0" Padding="0, 0, 5, 0">
+            <Border Grid.Column="0" BorderBrush="Orange" BorderThickness="0, 0, 3, 0" Padding="0, 0, 5, 0">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel Orientation="Vertical">
                         <ItemsControl x:Name="IngredientsItemsControl" Focusable="False">
@@ -249,7 +266,7 @@
                                             <ColumnDefinition Width="6*"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Label Content="{Binding StepId}" Foreground="White" Padding="2, 2, 0, 0"/>
+                                        <Label Content="{Binding StepId}" Foreground="Olive" Padding="2, 2, 0, 0"/>
                                         <TextBox Grid.Column="1" Text="{Binding StepContent}" 
                                                 Style="{StaticResource ItemTextBoxStyle}"/>
                                         <Button Grid.Column="2" x:Name="StepDeleteButton" Click="StepDeleteButton_Click"
@@ -263,7 +280,7 @@
                     </StackPanel>
                 </ScrollViewer>
 
-                <Border Grid.Row="1" BorderBrush="Yellow" BorderThickness="0, 1, 0, 0" Padding="0,0,0,5">
+                <Border Grid.Row="1" BorderBrush="Orange" BorderThickness="0, 3, 0, 0" Padding="0,0,0,5">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                         <StackPanel Orientation="Vertical">
                             <ItemsControl x:Name="NotesItemsControl" Focusable="False">
