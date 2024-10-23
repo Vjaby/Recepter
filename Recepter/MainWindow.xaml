@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Recepter"
         mc:Ignorable="d"
-        Title="Receper" Height="500" Width="750"
+        Title="Receper" Height="500" Width="850"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Background="Bisque"
         Foreground="Olive"
         FontFamily="Arial"
         WindowStyle="None"
-        MinWidth="500" MinHeight="300">
+        MinWidth="650" MinHeight="350">
     <!--
     colors: 
     button, textbox background: Olive
@@ -95,6 +95,9 @@
             <Setter Property="Background" Value="Olive"/>
             <Setter Property="Foreground" Value="Bisque"/>
             <Setter Property="Content" Value="X"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="FontSize" Value="15"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -121,6 +124,9 @@
             <Setter Property="Background" Value="Olive"/>
             <Setter Property="Foreground" Value="Bisque"/>
             <Setter Property="Margin" Value="0,5,0,0"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="FontSize" Value="15"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -149,6 +155,9 @@
             <Setter Property="Foreground" Value="Bisque"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Margin" Value="0, 0, 2, 0"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="FontSize" Value="15"/>
             <!--https://stackoverflow.com/questions/42013899/change-the-focused-border-color-of-a-wpf-textbox-when-it-gotfocus-->
             <Setter Property="Template">
                 <Setter.Value>
@@ -173,11 +182,11 @@
         </Style>
     </Window.Resources>
 
-    <Grid Margin="5">
+    <Grid Margin="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
 
         <!--Top row for buttons and control-->
@@ -210,7 +219,7 @@
 
 
         <!--main part: ingredients and steps-->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
@@ -309,16 +318,17 @@
         </Grid>
 
         <!--Tiny row for whatever (version...)-->
-        <Grid Grid.Row="2" Margin="5, 0, 5, 0">
+        <Grid Grid.Row="2" Margin="5, 0, 5, 5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0">
+            <TextBlock Grid.Column="0" Margin="0 5 0 0">
                 Version 0.1</TextBlock>
             <TextBox Grid.Column="1" Text="New Recipe"
                      Style="{StaticResource ItemTextBoxStyle}"
+                     Margin="0"
                      Width="200" HorizontalAlignment="Right"
                      x:Name="NameTextBox"/>
         </Grid>
