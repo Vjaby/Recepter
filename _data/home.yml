@@ -1,0 +1,20 @@
+navbar_entries:
+  - title: about
+    url: about
+
+  - title: blog
+    url: blog
+
+project_entries:
+
+
+old_project_entries:
+
+
+footer_entries:
+  - title: GITHUB
+    url: https://github.com/
+
+misc_entries:
+
+
