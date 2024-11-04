@@ -1,6 +1,7 @@
 title: Recepter
 author: Who should this even be now?
-url: https://vjaby.github.io/Recepter/ # root address of the site
+url: https://vjaby.github.io # root address of the site
+baseurl: /Recepter # "Serve the website from the given base URL (the path between web-server or domain root and your landing page)." from https://jekyllrb.com/docs/configuration/options/ idk what it means but I think this is correct
 description: > # description of the site (multiple lines allowed)
   IN THE PROCESS OF TAKING OVER THIS THEME https://www.abhinavsaxena.com/moonwalk
   JUST WANTED TO SEE HOW EVERYTHING WORKS
