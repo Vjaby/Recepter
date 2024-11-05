@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib">
+
+    <System:String x:Key="NewButtonContent">Neu</System:String>
+    <System:String x:Key="SaveButtonContent">Schpeichern</System:String>
+    <System:String x:Key="SaveAsButtonContent">Speichern unter...</System:String>
+    <System:String x:Key="OpenButtonContent">Öffnen</System:String>
+</ResourceDictionary>

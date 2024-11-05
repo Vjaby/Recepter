@@ -192,22 +192,35 @@
         <!--Top row for buttons and control-->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="270"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
             <!--Open, save... buttons-->
             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <Button x:Name="NewButton" Content="New" Click="NewButton_Click"
+                <Button x:Name="NewButton" Content="{DynamicResource NewButtonContent}" Click="NewButton_Click"
                         Style="{StaticResource FileButtonStyle}"/>
-                <Button x:Name="SaveButton" Content="Save" Click="SaveButton_Click"
+                <Button x:Name="SaveButton" Content="{DynamicResource SaveButtonContent}" Click="SaveButton_Click"
                         Style="{StaticResource FileButtonStyle}"/>
-                <Button x:Name="SaveAsButton" Content="Save As" Click="SaveAsButton_Click"
+                <Button x:Name="SaveAsButton" Content="{DynamicResource SaveAsButtonContent}" Click="SaveAsButton_Click"
                         Style="{StaticResource FileButtonStyle}"/>
-                <Button x:Name="OpenButton" Content="Open" Click="OpenButton_Click"
+                <Button x:Name="OpenButton" Content="{DynamicResource OpenButtonContent}" Click="OpenButton_Click"
                         Style="{StaticResource FileButtonStyle}"/>
             </StackPanel>
+
+            <!--Language buttons-->
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button x:Name="CSButton" Content="CS" Tag="cs-CZ" 
+                        Click="LangButtons_Click" />
+                <Button x:Name="DEButton" Content="DE" Tag="de-DE" 
+                        Click="LangButtons_Click" />
+                <Button x:Name="ENButton" Content="EN" Tag="en-GB" 
+                        Click="LangButtons_Click" IsEnabled="False"/>
+                <!--EN is default, so its disabled by default-->
+            </StackPanel>
+            
             <!--control buttons-->
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="MinButton" Content="🗕" Style="{StaticResource ControlButtonStyle}"
                         Click="MinButton_Click"/>
                 <Button x:Name="MaxButton" Content="🗖" Style="{StaticResource ControlButtonStyle}"

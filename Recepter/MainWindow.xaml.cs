@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,6 +17,7 @@ using System.Xml.Serialization;
 using Microsoft.Win32;
 using System.Windows.Interop;
 using System.Windows.Controls.Primitives;
+using System.Globalization;
 
 namespace Recepter {
     /// <summary>
@@ -31,6 +32,8 @@ namespace Recepter {
 
         public MainWindow() {
             InitializeComponent();
+
+            ChangeLang(Properties.Settings.Default.lang);
 
             // to use xmlserializer the constructor must be parameterless
             // DELETE LATER (or maybe leave it like a html text placeholder or actualy do that but propperly... can you?)
@@ -317,6 +320,44 @@ namespace Recepter {
             else {
                 return false;
             }
+        }
+
+        private void LangButtons_Click(object sender, RoutedEventArgs e) {
+            //https://www.youtube.com/watch?v=FJSJLf76mBM
+            //https://www.azulcoding.com/wpf-multilingual/
+
+            ChangeLang(((Button)sender).Tag.ToString());
+        }
+        private void ChangeLang(string lang) {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+
+            Application.Current.Resources.MergedDictionaries.Clear();
+            ResourceDictionary resdict = new ResourceDictionary() {
+                Source = new Uri($"/Dictionary-{lang}.xaml", UriKind.Relative)
+            };
+            Application.Current.Resources.MergedDictionaries.Add(resdict);
+
+            CSButton.IsEnabled = true;
+            DEButton.IsEnabled = true;
+            ENButton.IsEnabled = true;
+
+            switch (lang) {
+                case "cs-CZ":
+                    CSButton.IsEnabled = false;
+                    break;
+                case "de-DE":
+                    DEButton.IsEnabled = false;
+                    break;
+                case "en-GB":
+                    ENButton.IsEnabled = false;
+                    break;
+                default:
+                    break;
+            }
+
+            Properties.Settings.Default.lang = lang;
+            Properties.Settings.Default.Save();
         }
     }
 

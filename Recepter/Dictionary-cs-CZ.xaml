@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib">
+
+    <System:String x:Key="NewButtonContent">Nový</System:String>
+    <System:String x:Key="SaveButtonContent">Uložit</System:String>
+    <System:String x:Key="SaveAsButtonContent">Uložit jako...</System:String>
+    <System:String x:Key="OpenButtonContent">Otevřít</System:String>
+</ResourceDictionary>
