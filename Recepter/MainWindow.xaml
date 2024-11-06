@@ -265,7 +265,7 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                         <Button x:Name="AddIngredientButton" Style="{StaticResource AddButtonStyle}" 
-                                Content="Add New Ingredient" Click="AddIngredientButton_Click"/>
+                                Content="{DynamicResource AddNewIngrButton}" Click="AddIngredientButton_Click"/>
                     </StackPanel>
                 </ScrollViewer>
             </Border>
@@ -298,7 +298,7 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                         <Button x:Name="AddStepButton" Style="{StaticResource AddButtonStyle}" 
-                                Content="Add New Step" Click="AddStepButton_Click"/>
+                                Content="{DynamicResource AddNewStepButton}" Click="AddStepButton_Click"/>
                     </StackPanel>
                 </ScrollViewer>
 
@@ -322,7 +322,7 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                             <Button x:Name="AddNoteButton" Style="{StaticResource AddButtonStyle}" 
-                                Content="Add New Note" Click="AddNoteButton_Click"/>
+                                Content="{DynamicResource AddNewNoteButton}" Click="AddNoteButton_Click"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Border>
@@ -339,7 +339,7 @@
 
             <TextBlock Grid.Column="0" Margin="0 5 0 0">
                 Version 0.1</TextBlock>
-            <TextBox Grid.Column="1" Text="New Recipe"
+            <TextBox Grid.Column="1" Text="{DynamicResource NewRecipe}"
                      Style="{StaticResource ItemTextBoxStyle}"
                      Margin="0"
                      Width="200" HorizontalAlignment="Right"

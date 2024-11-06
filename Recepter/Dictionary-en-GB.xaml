@@ -6,4 +6,8 @@
     <System:String x:Key="SaveButtonContent">Save</System:String>
     <System:String x:Key="SaveAsButtonContent">Save As...</System:String>
     <System:String x:Key="OpenButtonContent">Open</System:String>
+    <System:String x:Key="AddNewIngrButton">Add New Ingredient</System:String>
+    <System:String x:Key="AddNewStepButton">Add New Step</System:String>
+    <System:String x:Key="AddNewNoteButton">Add New Note</System:String>
+    <System:String x:Key="NewRecipe">New Recipe</System:String>
 </ResourceDictionary>

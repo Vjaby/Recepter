@@ -6,4 +6,8 @@
     <System:String x:Key="SaveButtonContent">Uložit</System:String>
     <System:String x:Key="SaveAsButtonContent">Uložit jako...</System:String>
     <System:String x:Key="OpenButtonContent">Otevřít</System:String>
+    <System:String x:Key="AddNewIngrButton">Přidat novou surovinu</System:String>
+    <System:String x:Key="AddNewStepButton">Přidat nový krok</System:String>
+    <System:String x:Key="AddNewNoteButton">Přidat novou poznámku</System:String>
+    <System:String x:Key="NewRecipe">Nový Recept</System:String>
 </ResourceDictionary>

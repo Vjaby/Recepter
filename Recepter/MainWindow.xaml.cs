@@ -163,7 +163,7 @@ namespace Recepter {
             Ingredients.Clear();
             Steps.Clear();
             Notes.Clear();
-            NameTextBox.Text = "New Recipe";
+            NameTextBox.Text = FindResource("NewRecipe").ToString();
 
             ResetItemsControl();
 
@@ -322,6 +322,7 @@ namespace Recepter {
             }
         }
 
+        #region Language
         private void LangButtons_Click(object sender, RoutedEventArgs e) {
             //https://www.youtube.com/watch?v=FJSJLf76mBM
             //https://www.azulcoding.com/wpf-multilingual/
@@ -359,6 +360,7 @@ namespace Recepter {
             Properties.Settings.Default.lang = lang;
             Properties.Settings.Default.Save();
         }
+        #endregion
     }
 
     public class Ingredient {

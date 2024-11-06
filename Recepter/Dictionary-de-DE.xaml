@@ -6,4 +6,8 @@
     <System:String x:Key="SaveButtonContent">Schpeichern</System:String>
     <System:String x:Key="SaveAsButtonContent">Speichern unter...</System:String>
     <System:String x:Key="OpenButtonContent">Öffnen</System:String>
+    <System:String x:Key="AddNewIngrButton">Neue Zutat</System:String>
+    <System:String x:Key="AddNewStepButton">Neuer Schritt</System:String>
+    <System:String x:Key="AddNewNoteButton">Neue Notiz</System:String>
+    <System:String x:Key="NewRecipe">Neues Rezept</System:String>
 </ResourceDictionary>
