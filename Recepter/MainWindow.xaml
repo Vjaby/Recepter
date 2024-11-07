@@ -27,13 +27,10 @@
     <Window.Resources>
         <!--new, save... buttons-->
         <Style x:Key="FileButtonStyle" TargetType="Button">
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Width" Value="60"/>
             <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Margin" Value="5, 0, 0, 0"/>
-            <Setter Property="Padding" Value="-2"/>
-            <Setter Property="Background" Value="Olive"/>
-            <Setter Property="Foreground" Value="Bisque"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Olive"/>
+            <Setter Property="Margin" Value="0 0 10 0"/>
             <!--from https://gist.github.com/Snegovikufa/9131410-->
             <Setter Property="Template">
                 <Setter.Value>
@@ -54,11 +51,6 @@
                     <Setter Property="Foreground" Value="Olive"/>
                 </Trigger>
             </Style.Triggers>
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="6"/>
-                </Style>
-            </Style.Resources>
         </Style>
 
         <!--min, max, close buttons-->
@@ -192,7 +184,7 @@
         <!--Top row for buttons and control-->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="270"/>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
@@ -209,7 +201,7 @@
             </StackPanel>
 
             <!--Language buttons-->
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="CSButton" Content="CS" Tag="cs-CZ" 
                         Click="LangButtons_Click" />
                 <Button x:Name="DEButton" Content="DE" Tag="de-DE" 

@@ -1,11 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:System="clr-namespace:System;assembly=mscorlib">
-    
-    <System:String x:Key="NewButtonContent">New</System:String>
-    <System:String x:Key="SaveButtonContent">Save</System:String>
-    <System:String x:Key="SaveAsButtonContent">Save As...</System:String>
-    <System:String x:Key="OpenButtonContent">Open</System:String>
+
+    <!--"ㅤ" char added since adding padding to the buttons doesnt work
+    as far as I can tell, its because of the template setter (that removes the button border)-->
+    <!--this could have been avoided if I just but the file buttons into a dropdown like a normal person-->
+    <System:String x:Key="NewButtonContent">ㅤNewㅤ</System:String>
+    <System:String x:Key="SaveButtonContent">ㅤSaveㅤ</System:String>
+    <System:String x:Key="SaveAsButtonContent">ㅤSave As...ㅤ</System:String>
+    <System:String x:Key="OpenButtonContent">ㅤOpenㅤ</System:String>
     <System:String x:Key="AddNewIngrButton">Add New Ingredient</System:String>
     <System:String x:Key="AddNewStepButton">Add New Step</System:String>
     <System:String x:Key="AddNewNoteButton">Add New Note</System:String>
