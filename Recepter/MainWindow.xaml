@@ -11,7 +11,7 @@
         Foreground="Olive"
         FontFamily="Arial"
         WindowStyle="None"
-        MinWidth="650" MinHeight="350">
+        MinWidth="680" MinHeight="350">
     <!--
     colors: 
     button, textbox background: Olive
@@ -78,6 +78,38 @@
                 <Trigger Property="IsKeyboardFocused" Value="True">
                     <Setter Property="Background" Value="Orange"/>
                     <Setter Property="Foreground" Value="Olive"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="LangButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Olive"/>
+            <Setter Property="Margin" Value="0 0 10 0"/>
+            <!--from https://gist.github.com/Snegovikufa/9131410-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Orange"/>
+                    <Setter Property="Foreground" Value="Olive"/>
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Background" Value="Orange"/>
+                    <Setter Property="Foreground" Value="Olive"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="Orange"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -201,13 +233,15 @@
             </StackPanel>
 
             <!--Language buttons-->
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Grid.Column="1" Orientation="Horizontal" 
+                        HorizontalAlignment="Right" Margin="0, 0, 20, 0">
                 <Button x:Name="CSButton" Content="CS" Tag="cs-CZ" 
-                        Click="LangButtons_Click" />
+                        Click="LangButtons_Click" Style="{StaticResource LangButtonStyle}"/>
                 <Button x:Name="DEButton" Content="DE" Tag="de-DE" 
-                        Click="LangButtons_Click" />
+                        Click="LangButtons_Click" Style="{StaticResource LangButtonStyle}"/>
                 <Button x:Name="ENButton" Content="EN" Tag="en-GB" 
-                        Click="LangButtons_Click" IsEnabled="False"/>
+                        Click="LangButtons_Click" Style="{StaticResource LangButtonStyle}"
+                        IsEnabled="False"/>
                 <!--EN is default, so its disabled by default-->
             </StackPanel>
             
