@@ -364,7 +364,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Margin="0 5 0 0">
-                Version 0.1</TextBlock>
+                v1.1</TextBlock>
             <TextBox Grid.Column="1" Text="{DynamicResource NewRecipe}"
                      Style="{StaticResource ItemTextBoxStyle}"
                      Margin="0"
