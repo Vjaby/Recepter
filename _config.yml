@@ -3,16 +3,15 @@ author: Who should this even be now?
 url: https://vjaby.github.io # root address of the site
 baseurl: /Recepter # "Serve the website from the given base URL (the path between web-server or domain root and your landing page)." from https://jekyllrb.com/docs/configuration/options/ idk what it means but I think this is correct
 description: > # description of the site (multiple lines allowed)
-  IN THE PROCESS OF TAKING OVER THIS THEME https://www.abhinavsaxena.com/moonwalk
-  JUST WANTED TO SEE HOW EVERYTHING WORKS
+  Recepter is designed to help you write down your recipes in a streamlined manner and not get in the way with useless fluff. 
 
 permalink: /:slug
 
 theme_config:
   appearance: "dark" # can be "light", "dark" or "auto"
   appearance_toggle: true # if appearance can be switched by user
-  back_home_text: "home.." # customize text for homepage link in post layout
-  date_format: "%d.%m. %Y" # customize how date is formatted
+  back_home_text: "Home" # customize text for homepage link in post layout
+  date_format: "%Y-%m-%d" # customize how date is formatted
   show_description: true # show blog description
   show_navbar: true # show horizontal navbar
   show_footer: true # show footer links in home page,add in _data/home.yml
