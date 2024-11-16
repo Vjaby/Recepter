@@ -1,0 +1,17 @@
+.download-container{
+    display: flex;
+}
+
+.download-item{
+    padding: 1em;
+    border: 1px var(--text) solid;
+    text-align: center;
+    font-size: 1em;
+    background-color: var(--bg-secondary);
+    margin-bottom: 1em;
+    border-radius: 0.5em;
+    margin: 1em;
+    flex: 1;
+}
+
+

@@ -5,6 +5,9 @@ navbar_entries:
   - title: Blog
     url: blog
 
+  - title: Download
+    url: download
+
 project_entries:
 
 
