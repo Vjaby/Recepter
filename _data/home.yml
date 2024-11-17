@@ -1,4 +1,7 @@
 navbar_entries:
+  - title: Home
+    url: "/Recepter/" #idk what im doing
+
   - title: About
     url: about
 
