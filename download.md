@@ -1,4 +1,4 @@
 ---
 layout: download
-title: Recepter - Download
+title: Download
 ---
