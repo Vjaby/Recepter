@@ -1,5 +1,4 @@
 title: Recepter
-author: Who should this even be now?
 url: https://vjaby.github.io # root address of the site
 baseurl: /Recepter # "Serve the website from the given base URL (the path between web-server or domain root and your landing page)." from https://jekyllrb.com/docs/configuration/options/ idk what it means but I think this is correct
 description: > # description of the site (multiple lines allowed)
@@ -16,6 +15,7 @@ theme_config:
   show_navbar: true # show horizontal navbar
   show_footer: true # show footer links in home page,add in _data/home.yml
   show_copyright: false # show copyright notice in footer
+
   # following keys are using to create home layout
   show_projects: false # show projects as cards, add in _data/home.yml
   show_blog: true # show blog posts added in _posts
@@ -23,6 +23,7 @@ theme_config:
   show_misc_list: false # show generic vertical list for misc details, add _data/home.yml
   show_reading_time: true # show number of words and reading time in the blog posts
   show_tags: true # show tags in a blog posts
+  
   # options for "home" page
   home:
     title_projects: Portfolio
