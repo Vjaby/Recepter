@@ -1,7 +1,4 @@
----
----
-
-@import "moonwalk";
-@import "list";
-@import "syntax";
-@import "download";
+@use "moonwalk";
+@use "list";
+@use "syntax";
+@use "download";
