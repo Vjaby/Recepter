@@ -24,3 +24,10 @@ footer_entries:
 misc_entries:
 
 
+windows_download_entries:
+  - title: v0.1.0
+    url: "0_1_0"
+
+linux_download_entries:
+  - title: v0.1.0
+    url: False

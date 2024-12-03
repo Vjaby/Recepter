@@ -9,12 +9,12 @@ layout: default
 {{ content }}
 <div class="download-container">
     <div class="download-item">
-        <p> Download for Widnows: </p> 
-        <a download href="assets/downloads/install_recepter_windows.exe">here</a>
+        <h3>Download for Windows:</h3>
+        {% include windows_download_list.html %}
     </div>
     <div class="download-item">
-        <p> Sorry, not available for Linux yet. </p> 
-        <!--<a download href="assets/downloads/">here</a>-->
+        <h3>Download for Linux:</h3>
+        {% include linux_download_list.html %}
     </div>
 </div>
 <hr>

@@ -1,0 +1,13 @@
+<ul>
+    {% for item in site.data.home.linux_download_entries %}
+      <li>
+      {% if item.url != false %}
+        <a download href="assets/downloads/linux/install_recepter_linux_{{ item.url }}.exe">{{ item.title }}</a>
+      {% else %}
+        {{ item.title }}
+      {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  
+<!--Probably not ".exe" for linux...-->
