@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<Recipe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Ingredients>
+    <Ingredient>
+      <Name>Canned tomatos</Name>
+      <Amount>400</Amount>
+      <Unit>g</Unit>
+    </Ingredient>
+    <Ingredient>
+      <Name>Onion - large</Name>
+      <Amount>1</Amount>
+      <Unit />
+    </Ingredient>
+    <Ingredient>
+      <Name>Meat</Name>
+      <Amount>300</Amount>
+      <Unit>g</Unit>
+    </Ingredient>
+    <Ingredient>
+      <Name>Butter</Name>
+      <Amount>1</Amount>
+      <Unit>tbs</Unit>
+    </Ingredient>
+    <Ingredient>
+      <Name>Pasta</Name>
+      <Amount>200</Amount>
+      <Unit>g</Unit>
+    </Ingredient>
+  </Ingredients>
+  <Steps>
+    <Step>
+      <StepId>1</StepId>
+      <StepContent>Chop meat into smaller chunks</StepContent>
+    </Step>
+    <Step>
+      <StepId>2</StepId>
+      <StepContent>Dice onion</StepContent>
+    </Step>
+    <Step>
+      <StepId>3</StepId>
+      <StepContent>Heat up pan</StepContent>
+    </Step>
+    <Step>
+      <StepId>4</StepId>
+      <StepContent>Add meat and onion</StepContent>
+    </Step>
+    <Step>
+      <StepId>5</StepId>
+      <StepContent>Roast until all of the meat has colour</StepContent>
+    </Step>
+    <Step>
+      <StepId>6</StepId>
+      <StepContent>Add canned tomatos</StepContent>
+    </Step>
+    <Step>
+      <StepId>7</StepId>
+      <StepContent>Add slightly undercooked pasta</StepContent>
+    </Step>
+    <Step>
+      <StepId>8</StepId>
+      <StepContent>Reduce sauce (the pasta will finish cooking)</StepContent>
+    </Step>
+    <Step>
+      <StepId>9</StepId>
+      <StepContent>Season to taste</StepContent>
+    </Step>
+  </Steps>
+  <Notes>
+    <Note>
+      <NoteContent>I like to use pork as my meat</NoteContent>
+    </Note>
+    <Note>
+      <NoteContent>If you're using tough meat, stew until tender before step 6</NoteContent>
+    </Note>
+    <Note>
+      <NoteContent>Any pasta is good but spaghetti is classic</NoteContent>
+    </Note>
+  </Notes>
+</Recipe>
