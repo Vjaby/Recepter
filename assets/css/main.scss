@@ -1,7 +1,10 @@
 ---
+# Deprecation Warning: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+# More info and automated migrator: https://sass-lang.com/d/import
+# They say this, but gh pages doesn't seem to work when "@use" is used
 ---
 
-@use "moonwalk";
-@use "list";
-@use "syntax";
-@use "download";
+@import "moonwalk";
+@import "list";
+@import "syntax";
+@import "download";
