@@ -27,28 +27,25 @@ namespace Recepter {
 
             ChangeLang(Properties.Settings.Default.lang);
 
-            // to use xmlserializer the constructor must be parameterless
-            // DELETE LATER (or maybe leave it like a html text placeholder or actualy do that but propperly... can you?)
-            Ingredients.Add(new Ingredient() {
-                Name = "potat",
-                Amount = 2,
-                Unit = "kg"
-            });
-            Ingredients.Add(new Ingredient() {
-                Name = "ham",
-                Amount = 220,
-                Unit = "g"
-            });
-            Steps.Add(new Step() {
-                StepId = 1,
-                StepContent = "do this"
-            });
-            Steps.Add(new Step() {
-                StepId = 2,
-                StepContent = "to that"
-            });
-            Notes.Add(new Note() { NoteContent = "maybe" });
-            Notes.Add(new Note() { NoteContent = "you can" });
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Length > 1) {
+                // opening app by draging a file onto it 
+                // or file.xml -> open file with -> this thing
+                OpenFileMethod(args[1].ToString());
+            }
+            else { 
+                // add some placeholders
+                Ingredients.Add(new Ingredient() {
+                    Name = "Pasta",
+                    Amount = 200,
+                    Unit = "g"
+                });
+                Steps.Add(new Step() {
+                    StepId = 1,
+                    StepContent = "Boil water in a pot"
+                });
+                Notes.Add(new Note() { NoteContent = "Helpfull tip" });
+            }
 
             IngredientsItemsControl.ItemsSource = Ingredients;
             StepsItemsControl.ItemsSource = Steps;
@@ -125,26 +122,31 @@ namespace Recepter {
             }
 
             // I took this and did my best https://learn.microsoft.com/cs-cz/dotnet/api/system.windows.forms.savefiledialog?view=windowsdesktop-8.0
-            Stream stream;
             OpenFileDialog openFileDialog = new OpenFileDialog {
                 Filter = "xml|*.xml"
             };
 
             if ((bool)openFileDialog.ShowDialog()) {
-                if ((stream = openFileDialog.OpenFile()) != null) {
-                    XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
-                    SavedRecipe = (Recipe)(serializer.Deserialize(stream));
-
-                    Ingredients = SavedRecipe.Ingredients.ToList();
-                    Steps = SavedRecipe.Steps.ToList();
-                    Notes = SavedRecipe.Notes.ToList();
-                    NameTextBox.Text = (openFileDialog.SafeFileName).Replace(".xml", "");
-                    SavedPath = openFileDialog.FileName;
-
-                    ResetItemsControl();
-                    stream.Close();
+                string filepath = openFileDialog.FileName;
+                if (!string.IsNullOrEmpty(filepath)) {
+                    OpenFileMethod(filepath);
                 }
             }
+        }
+
+        private void OpenFileMethod(string filepath) {
+            XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
+            Stream st = File.Open(filepath, FileMode.Open);
+            SavedRecipe = (Recipe)(serializer.Deserialize(st));
+
+            Ingredients = SavedRecipe.Ingredients.ToList();
+            Steps = SavedRecipe.Steps.ToList();
+            Notes = SavedRecipe.Notes.ToList();
+            NameTextBox.Text = (Path.GetFileNameWithoutExtension(filepath));
+            SavedPath = filepath;
+
+            ResetItemsControl();
+            st.Close();
         }
 
         private void NewButton_Click(object sender, RoutedEventArgs e) {
@@ -355,6 +357,9 @@ namespace Recepter {
         #endregion
     }
 
+    // to use xmlserializer the constructor must be parameterless
+    // so in this case, nothing
+    // otherwise it could've been usefull
     public class Ingredient {
         public string Name { get; set; }
         public int Amount { get; set; }
@@ -362,7 +367,6 @@ namespace Recepter {
     }
 
     public class Step {
-
         public int StepId { get; set; }
         public string StepContent { get; set; }
 
