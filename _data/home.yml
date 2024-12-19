@@ -11,17 +11,10 @@ navbar_entries:
   - title: Download
     url: download
 
-project_entries:
-
-
-old_project_entries:
-
 
 footer_entries:
   - title: GitHub
     url: https://github.com/Vjaby/Recepter/
-
-misc_entries:
 
 
 windows_download_entries:
