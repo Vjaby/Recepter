@@ -117,10 +117,6 @@ namespace Recepter {
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e) {
-            if (IsUnsaved()) {
-                return;
-            }
-
             // I took this and did my best https://learn.microsoft.com/cs-cz/dotnet/api/system.windows.forms.savefiledialog?view=windowsdesktop-8.0
             OpenFileDialog openFileDialog = new OpenFileDialog {
                 Filter = "xml|*.xml"
@@ -134,20 +130,6 @@ namespace Recepter {
             }
         }
 
-        private void OpenFileMethod(string filepath) {
-            XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
-            Stream st = File.Open(filepath, FileMode.Open);
-            SavedRecipe = (Recipe)(serializer.Deserialize(st));
-
-            Ingredients = SavedRecipe.Ingredients.ToList();
-            Steps = SavedRecipe.Steps.ToList();
-            Notes = SavedRecipe.Notes.ToList();
-            NameTextBox.Text = (Path.GetFileNameWithoutExtension(filepath));
-            SavedPath = filepath;
-
-            ResetItemsControl();
-            st.Close();
-        }
 
         private void NewButton_Click(object sender, RoutedEventArgs e) {
             if (IsUnsaved()) {
@@ -355,6 +337,46 @@ namespace Recepter {
             Properties.Settings.Default.Save();
         }
         #endregion
+
+
+        private void OpenFileMethod(string filepath) {
+            // https://learn.microsoft.com/cs-cz/dotnet/api/system.windows.forms.savefiledialog?view=windowsdesktop-8.0
+            if (IsUnsaved()) {
+                return;
+            }
+
+            if (filepath.Substring(filepath.Length - 4) != ".xml") {
+                MessageBox.Show("Can't open this file type",
+                                "",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                return;
+            }
+
+            XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
+            Stream st = File.Open(filepath, FileMode.Open);
+            SavedRecipe = (Recipe)(serializer.Deserialize(st));
+
+            Ingredients = SavedRecipe.Ingredients.ToList();
+            Steps = SavedRecipe.Steps.ToList();
+            Notes = SavedRecipe.Notes.ToList();
+            NameTextBox.Text = (Path.GetFileNameWithoutExtension(filepath));
+            SavedPath = filepath;
+
+            ResetItemsControl();
+            st.Close();
+        }
+
+
+        private void Window_Drop(object sender, DragEventArgs e) {
+            // https://stackoverflow.com/questions/5662509/drag-and-drop-files-into-wpf
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                string filepath = Path.GetFullPath(files[0]);
+                OpenFileMethod(filepath);
+            }
+        }
     }
 
     // to use xmlserializer the constructor must be parameterless

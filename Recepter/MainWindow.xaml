@@ -11,7 +11,9 @@
         Foreground="Olive"
         FontFamily="Arial"
         WindowStyle="None"
-        MinWidth="680" MinHeight="350">
+        MinWidth="680" MinHeight="350"
+        AllowDrop="True"
+        Drop="Window_Drop">
     <!--
     colors: 
     button, textbox background: Olive
