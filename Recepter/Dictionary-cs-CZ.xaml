@@ -13,4 +13,7 @@
     <System:String x:Key="AddNewStepButton">Přidat nový krok</System:String>
     <System:String x:Key="AddNewNoteButton">Přidat novou poznámku</System:String>
     <System:String x:Key="NewRecipe">Nový Recept</System:String>
+    <System:String x:Key="WantToSave">Chcete tento recept uložit?</System:String>
+    <System:String x:Key="UnsavedChanges">NEULOŽENÉ ZMĚNY</System:String>
+    <System:String x:Key="FileTypeError">Tento typ souboru nelze otevřít</System:String>
 </ResourceDictionary>

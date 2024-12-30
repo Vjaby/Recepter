@@ -13,4 +13,7 @@
     <System:String x:Key="AddNewStepButton">Add New Step</System:String>
     <System:String x:Key="AddNewNoteButton">Add New Note</System:String>
     <System:String x:Key="NewRecipe">New Recipe</System:String>
+    <System:String x:Key="WantToSave">Do you want to save this recipe?</System:String>
+    <System:String x:Key="UnsavedChanges">UNSAVED CHANGES</System:String>
+    <System:String x:Key="FileTypeError">This file type cannot be opened</System:String>
 </ResourceDictionary>

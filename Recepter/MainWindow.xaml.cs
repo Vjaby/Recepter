@@ -277,8 +277,8 @@ namespace Recepter {
             //if the last saved recipe isnt the same as the recipe now...
             if (savedRecipeString != recipeString)
             {
-                var result = MessageBox.Show("Do you want to save this recipe?",
-                                             "UNSAVED CHANGES",
+                var result = MessageBox.Show(FindResource("WantToSave").ToString(),
+                                             FindResource("UnsavedChanges").ToString(),
                                              MessageBoxButton.YesNoCancel,
                                              MessageBoxImage.Warning,
                                              MessageBoxResult.Cancel);
@@ -346,7 +346,7 @@ namespace Recepter {
             }
 
             if (filepath.Substring(filepath.Length - 4) != ".xml") {
-                MessageBox.Show("Can't open this file type",
+                MessageBox.Show(FindResource("FileTypeError").ToString(),
                                 "",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
