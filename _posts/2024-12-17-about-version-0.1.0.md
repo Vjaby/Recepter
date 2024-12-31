@@ -16,8 +16,8 @@ The app works. There are many things to fix, change and improve but this is a go
 #### What's coming
 - Bug fixes (there's sure to be loads of them)
 - Better placeholders - when opening the app, what shows up in the lists
-- Oppening the app with files - when you drag a recipie file onto Receper.exe it should open. Of course also when double clicking on the file or using Open with... Recepter
-- Oppening file by draging them onto the (running) app
+- Opening the app with files - when you drag a recipie file onto Receper.exe it should open. Of course also when double clicking on the file or using Open with... -> Recepter
+- Opening file by draging them onto the (running) app
 - Icons!
 - Checks - so it's not possible to do something dumb
 - Update localization files
