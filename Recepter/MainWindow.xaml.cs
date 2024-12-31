@@ -22,6 +22,7 @@ namespace Recepter {
         Recipe SavedRecipe = new Recipe();
         string SavedPath = "";
 
+
         public MainWindow() {
             InitializeComponent();
 
@@ -56,15 +57,19 @@ namespace Recepter {
             SavedRecipe.Notes = Notes.ToList();
         }
 
+
         // Close, minimize, maximize buttons and draging
         #region controls
+
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
             DragMove();
         }
 
+
         private void MinButton_Click(object sender, RoutedEventArgs e) {
             WindowState = WindowState.Minimized;
         }
+
 
         private void MaxButton_Click(object sender, RoutedEventArgs e) {
             if (WindowState == WindowState.Maximized) {
@@ -74,12 +79,15 @@ namespace Recepter {
             WindowState = WindowState.Maximized;
         }
 
+
         private void CloseButton_Click(object sender, RoutedEventArgs e) {
             Close();
         }
+
         #endregion
 
-        //Save, open, new file
+
+        // Save, open, new file
         #region File Buttons
 
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
@@ -116,6 +124,7 @@ namespace Recepter {
             }
         }
 
+
         private void OpenButton_Click(object sender, RoutedEventArgs e) {
             // I took this and did my best https://learn.microsoft.com/cs-cz/dotnet/api/system.windows.forms.savefiledialog?view=windowsdesktop-8.0
             OpenFileDialog openFileDialog = new OpenFileDialog {
@@ -151,6 +160,7 @@ namespace Recepter {
             SavedPath = "";
         }
 
+
         private void SaveAsButton_Click(object sender, RoutedEventArgs e) {
             // I took this and did my best https://learn.microsoft.com/cs-cz/dotnet/api/system.windows.forms.savefiledialog?view=windowsdesktop-8.0
             Stream stream;
@@ -177,10 +187,13 @@ namespace Recepter {
                 }
             }
         }
+
         #endregion
 
-        //adding a new ingredient, step, note
+
+        // adding a new ingredient, step, note
         #region Add Buttons
+
         private void AddIngredientButton_Click(object sender, RoutedEventArgs e) {
             Ingredients.Add(new Ingredient());
             ResetItemsControl();
@@ -195,10 +208,13 @@ namespace Recepter {
             Notes.Add(new Note());
             ResetItemsControl();
         }
+
         #endregion
 
-        //deleting an ingredient, step, note
+
+        // deleting an ingredient, step, note
         #region Delete Buttons
+
         private void NoteDeleteButton_Click(object sender, RoutedEventArgs e) {
             //inspiration here: https://stackoverflow.com/questions/16342885/access-other-xaml-controls-data-in-another-controls-event?rq=3
             Button btn = (Button)sender;
@@ -225,12 +241,14 @@ namespace Recepter {
             Ingredients.Remove(btnDataContext);
             ResetItemsControl();
         }
+
         #endregion
 
-        /*
-        Makes sure the ItemsControls are showing what their supposed to
-        especialy after adding or deleting
-        */
+        // Other methods
+        #region Helpers and co
+
+        //Makes sure the ItemsControls are showing what their supposed to
+        //especialy after adding or deleting
         private void ResetItemsControl() {
             IngredientsItemsControl.ItemsSource = null;
             IngredientsItemsControl.ItemsSource = Ingredients;
@@ -240,6 +258,7 @@ namespace Recepter {
             NotesItemsControl.ItemsSource = Notes;
             //if it works...
         }
+
 
          /*
          chcecks for unsaved changes
@@ -260,10 +279,8 @@ namespace Recepter {
                 Notes = Notes.ToList()
             };
 
-            /*
-            create strings out of the recipe and SavedRecipe objects and comapre those
-            because .Equals (or ==) doesn't work (because of complex objects (i guess))
-            */
+            //create strings out of the recipe and SavedRecipe objects and comapre those
+            //because .Equals (or ==) doesn't work (because of complex objects (i guess))
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(Recipe));
             using (StringWriter textWriter = new StringWriter()) {
                 xmlSerializer.Serialize(textWriter, recipe);
@@ -298,13 +315,17 @@ namespace Recepter {
             }
         }
 
+
         #region Language
+
         private void LangButtons_Click(object sender, RoutedEventArgs e) {
             //https://www.youtube.com/watch?v=FJSJLf76mBM
             //https://www.azulcoding.com/wpf-multilingual/
 
             ChangeLang(((Button)sender).Tag.ToString());
         }
+
+
         private void ChangeLang(string lang) {
             Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
@@ -336,6 +357,7 @@ namespace Recepter {
             Properties.Settings.Default.lang = lang;
             Properties.Settings.Default.Save();
         }
+
         #endregion
 
 
@@ -377,7 +399,10 @@ namespace Recepter {
                 OpenFileMethod(filepath);
             }
         }
+
+        #endregion
     }
+
 
     // to use xmlserializer the constructor must be parameterless
     // so in this case, nothing
@@ -388,15 +413,18 @@ namespace Recepter {
         public string Unit { get; set; }
     }
 
+
     public class Step {
         public int StepId { get; set; }
         public string StepContent { get; set; }
 
     }
 
+
     public class Note {
         public string NoteContent { get; set; }
     }
+
 
     public class Recipe {
         public List<Ingredient> Ingredients { get; set; }
