@@ -22,5 +22,4 @@ Recepters simplicity allows it to be extremely small and efficient. The .exe fil
 8. Notes
 
 Stupidly simple, I know.  
-Want the recipe? Get it <a download href="assets/downloads/Easy Pasta.xml">here.</a>  
-Recipes are saved as .xml files. No fancy file types here.
+Want the recipe? Get it <a download href="assets/downloads/Easy Pasta.xml">here.</a>
