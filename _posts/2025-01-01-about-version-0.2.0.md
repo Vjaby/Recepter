@@ -14,3 +14,4 @@ The first update for Recepter is here.
 
 #### What's coming
 - Custom file extension
+- README file
