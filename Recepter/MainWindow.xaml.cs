@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 using Microsoft.Win32;
 using System.Windows.Controls.Primitives;
 using System.Globalization;
+using System.ComponentModel;
 
 namespace Recepter {
     /// <summary>
@@ -55,6 +56,10 @@ namespace Recepter {
             SavedRecipe.Ingredients = Ingredients.ToList();
             SavedRecipe.Steps = Steps.ToList();
             SavedRecipe.Notes = Notes.ToList();
+
+            // https://stackoverflow.com/a/8398176
+            // (the rest is in "Other methods" region)
+            Application.Current.MainWindow.Closing += new CancelEventHandler(MainWindow_Closing);
         }
 
 
@@ -244,8 +249,8 @@ namespace Recepter {
 
         #endregion
 
-        // Other methods
-        #region Helpers and co
+        // Helpers and such
+        #region Other methods
 
         //Makes sure the ItemsControls are showing what their supposed to
         //especialy after adding or deleting
@@ -397,6 +402,18 @@ namespace Recepter {
 
                 string filepath = Path.GetFullPath(files[0]);
                 OpenFileMethod(filepath);
+            }
+        }
+
+
+        // https://stackoverflow.com/a/8398176
+        // (the first bit is in "public MainWindow()")
+        void MainWindow_Closing(object sender, CancelEventArgs e)
+        {
+            if (IsUnsaved())
+            {
+                // cancle the closing event
+                e.Cancel = true;
             }
         }
 
