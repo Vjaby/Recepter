@@ -106,7 +106,7 @@ namespace Recepter {
             */
             if (File.Exists(SavedPath) && NameTextBox.Text == System.IO.Path.GetFileName(SavedPath).Replace(".xml", ""))
             {
-                Stream stream = File.OpenWrite(SavedPath);
+                Stream stream = File.Open(SavedPath, FileMode.Create);
 
                 // this check maybe dosn't need to happen since we already checked File.Exists
                 if (stream != null) {
