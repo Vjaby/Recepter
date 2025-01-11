@@ -104,7 +104,7 @@ namespace Recepter {
             else check if SavedPath exists if yes -> save
                                            if not -> save as
             */
-            if (File.Exists(SavedPath) && NameTextBox.Text == System.IO.Path.GetFileName(SavedPath).Replace(".xml", ""))
+            if (File.Exists(SavedPath) && NameTextBox.Text == System.IO.Path.GetFileName(SavedPath).Replace(".rcpt", ""))
             {
                 Stream stream = File.Open(SavedPath, FileMode.Create);
 
@@ -133,7 +133,7 @@ namespace Recepter {
         private void OpenButton_Click(object sender, RoutedEventArgs e) {
             // I took this and did my best https://learn.microsoft.com/cs-cz/dotnet/api/system.windows.forms.savefiledialog?view=windowsdesktop-8.0
             OpenFileDialog openFileDialog = new OpenFileDialog {
-                Filter = "xml|*.xml"
+                Filter = "Recipe File|*.rcpt"
             };
 
             if ((bool)openFileDialog.ShowDialog()) {
@@ -170,7 +170,7 @@ namespace Recepter {
             // I took this and did my best https://learn.microsoft.com/cs-cz/dotnet/api/system.windows.forms.savefiledialog?view=windowsdesktop-8.0
             Stream stream;
             SaveFileDialog saveFileDialog = new SaveFileDialog {
-                Filter = "xml|*.xml",
+                Filter = "Recipe File|*.rcpt",
                 FileName = NameTextBox.Text
             };
 
@@ -187,7 +187,7 @@ namespace Recepter {
                     stream.Close();
 
                     SavedRecipe = recipe;
-                    NameTextBox.Text = (saveFileDialog.SafeFileName).Replace(".xml", "");
+                    NameTextBox.Text = (saveFileDialog.SafeFileName).Replace(".rcpt", "");
                     SavedPath = saveFileDialog.FileName;
                 }
             }
@@ -372,7 +372,7 @@ namespace Recepter {
                 return;
             }
 
-            if (filepath.Substring(filepath.Length - 4) != ".xml") {
+            if (Path.GetExtension(filepath) != ".rcpt") {
                 MessageBox.Show(FindResource("FileTypeError").ToString(),
                                 "",
                                 MessageBoxButton.OK,
