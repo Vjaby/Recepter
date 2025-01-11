@@ -29,26 +29,6 @@ namespace Recepter {
 
             ChangeLang(Properties.Settings.Default.lang);
 
-            string[] args = Environment.GetCommandLineArgs();
-            if (args.Length > 1) {
-                // opening app by draging a file onto it 
-                // or file.xml -> open file with -> this thing
-                OpenFileMethod(args[1].ToString());
-            }
-            else { 
-                // add some placeholders
-                Ingredients.Add(new Ingredient() {
-                    Name = "Pasta",
-                    Amount = 200,
-                    Unit = "g"
-                });
-                Steps.Add(new Step() {
-                    StepId = 1,
-                    StepContent = "Boil water in a pot"
-                });
-                Notes.Add(new Note() { NoteContent = "Helpfull tip" });
-            }
-
             IngredientsItemsControl.ItemsSource = Ingredients;
             StepsItemsControl.ItemsSource = Steps;
             NotesItemsControl.ItemsSource = Notes;
@@ -56,6 +36,30 @@ namespace Recepter {
             SavedRecipe.Ingredients = Ingredients.ToList();
             SavedRecipe.Steps = Steps.ToList();
             SavedRecipe.Notes = Notes.ToList();
+
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Length > 1)
+            {
+                // opening app by draging a file onto it 
+                // or file.xml -> open file with -> this thing
+                OpenFileMethod(args[1].ToString());
+            }
+            else
+            {
+                // add some placeholders
+                Ingredients.Add(new Ingredient()
+                {
+                    Name = "Pasta",
+                    Amount = 200,
+                    Unit = "g"
+                });
+                Steps.Add(new Step()
+                {
+                    StepId = 1,
+                    StepContent = "Boil water in a pot"
+                });
+                Notes.Add(new Note() { NoteContent = "Helpfull tip" });
+            }
 
             // https://stackoverflow.com/a/8398176
             // (the rest is in "Other methods" region)
