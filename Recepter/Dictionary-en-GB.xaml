@@ -2,13 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:System="clr-namespace:System;assembly=mscorlib">
 
-    <!--"ㅤ" char added since adding padding to the buttons doesnt work
+    <!--4 no break spaces (&#160;&#160;&#160;&#160;) added since adding padding to the buttons doesnt work
     as far as I can tell, its because of the template setter (that removes the button border)-->
+    <!--too bad Linux doesn't seem to like stuff like "Em Space", which would've been used insted-->
     <!--this could have been avoided if I just but the file buttons into a dropdown like a normal person-->
-    <System:String x:Key="NewButtonContent">ㅤNewㅤ</System:String>
-    <System:String x:Key="SaveButtonContent">ㅤSaveㅤ</System:String>
-    <System:String x:Key="SaveAsButtonContent">ㅤSave As...ㅤ</System:String>
-    <System:String x:Key="OpenButtonContent">ㅤOpenㅤ</System:String>
+    <System:String x:Key="NewButtonContent">&#160;&#160;&#160;&#160;New&#160;&#160;&#160;&#160;</System:String>
+    <System:String x:Key="SaveButtonContent">&#160;&#160;&#160;&#160;Save&#160;&#160;&#160;&#160;</System:String>
+    <System:String x:Key="SaveAsButtonContent">&#160;&#160;&#160;&#160;Save As...&#160;&#160;&#160;&#160;</System:String>
+    <System:String x:Key="OpenButtonContent">&#160;&#160;&#160;&#160;Open&#160;&#160;&#160;&#160;</System:String>
     <System:String x:Key="AddNewIngrButton">Add New Ingredient</System:String>
     <System:String x:Key="AddNewStepButton">Add New Step</System:String>
     <System:String x:Key="AddNewNoteButton">Add New Note</System:String>

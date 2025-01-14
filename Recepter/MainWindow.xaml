@@ -249,11 +249,11 @@
             
             <!--control buttons-->
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="MinButton" Content="🗕" Style="{StaticResource ControlButtonStyle}"
+                <Button x:Name="MinButton" Content="_" Style="{StaticResource ControlButtonStyle}"
                         Click="MinButton_Click"/>
-                <Button x:Name="MaxButton" Content="🗖" Style="{StaticResource ControlButtonStyle}"
+                <Button x:Name="MaxButton" Content="^" Style="{StaticResource ControlButtonStyle}"
                         Click="MaxButton_Click"/>
-                <Button x:Name="CloseButton" Content="✖" Style="{StaticResource ControlButtonStyle}"
+                <Button x:Name="CloseButton" Content="X" Style="{StaticResource ControlButtonStyle}"
                         Click="CloseButton_Click"/>
             </StackPanel>
         </Grid>
