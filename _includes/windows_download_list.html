@@ -2,11 +2,10 @@
     {% for item in site.data.home.windows_download_entries %}
       <li>
       {% if item.url != false %}
-        <a download href="assets/downloads/windows/install_recepter_windows_{{ item.url }}.exe">{{ item.title }}</a>
+        <a download href="assets/downloads/windows/RecepterSetup{{ item.url }}.exe">{{ item.title }}</a>
       {% else %}
         {{ item.title }}
       {% endif %}
       </li>
     {% endfor %}
   </ul>
-  
