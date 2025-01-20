@@ -71,6 +71,10 @@ namespace Recepter {
         #region controls
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            }
             DragMove();
         }
 
