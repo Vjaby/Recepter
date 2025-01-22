@@ -21,5 +21,5 @@ Recepters simplicity allows it to be extremely small and efficient. The .exe fil
 7. Step list
 8. Notes
 
-Stupidly simple, I know.  
-Want the recipe? Get it <a download href="assets/downloads/Easy Pasta.xml">here.</a>
+Stupidly simple, I know.
+Want the recipe? Get it <a download href="assets/downloads/Easy Pasta.rcpt">here.</a>
