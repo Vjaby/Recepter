@@ -1,0 +1,11 @@
+<ul>
+  {% for item in site.data.home.archive_download_entries %}
+    <li>
+      {% if item.url != false %}
+        <a download href="assets/downloads/archive/Recepter{{ item.url }}.tar.gz">{{ item.title }}</a>
+      {% else %}
+        {{ item.title }}
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

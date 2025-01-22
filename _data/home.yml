@@ -17,7 +17,7 @@ footer_entries:
     url: https://github.com/Vjaby/Recepter/
 
 
-windows_download_entries:
+installer_download_entries:
   - title: v1.0.0
     url: "1.0.0"
   - title: v0.2.1
@@ -27,7 +27,9 @@ windows_download_entries:
   - title: v0.1.0
     url: "0.1.0"
 
-linux_download_entries:
+archive_download_entries:
+  - title: v1.0.0
+    url: "1.0.0"
   - title: v0.2.1
     url: False
   - title: v0.2.0
