@@ -1,5 +1,5 @@
 # EN
-## What is Recepter?
+### What is Recepter?
 
 Recepter is a desktop app designed to help you write down your recipes in a streamlined manner and not get in the way with useless fluff.
 
@@ -30,7 +30,7 @@ https://vjaby.github.io/Recepter/
 
 
 # CS
-## Co je to Recepter?
+### Co je to Recepter?
 
 Recepter je desktopová aplikace navržená tak, aby vám pomohla zapisovat si recepty efektivněji a zbytečně nepřekážela.
 
