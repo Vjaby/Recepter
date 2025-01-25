@@ -19,17 +19,17 @@ footer_entries:
 
 installer_download_entries:
   - title: v1.0.0
-    url: "1.0.0"
+    url: assets/downloads/installer/RecepterSetup1.0.0.exe
   - title: v0.2.1
-    url: "0.2.1"
+    url: assets/downloads/installer/RecepterSetup0.2.1.exe
   - title: v0.2.0
-    url: "0.2.0"
+    url: assets/downloads/installer/RecepterSetup0.2.0.exe
   - title: v0.1.0
-    url: "0.1.0"
+    url: assets/downloads/installer/RecepterSetup0.1.0.exe
 
 archive_download_entries:
   - title: v1.0.0
-    url: "1.0.0"
+    url: assets/downloads/archive/Recepter1.0.0.tar.gz
   - title: v0.2.1
     url: False
   - title: v0.2.0
