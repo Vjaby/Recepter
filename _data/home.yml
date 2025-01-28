@@ -19,7 +19,7 @@ footer_entries:
 
 installer_download_entries:
   - title: v1.0.0
-    url: assets/downloads/installer/RecepterSetup1.0.0.exe
+    url: https://github.com/Vjaby/Recepter/releases/download/v1.0.0/RecepterSetup1.0.0.exe
   - title: v0.2.1
     url: assets/downloads/installer/RecepterSetup0.2.1.exe
   - title: v0.2.0
@@ -29,7 +29,7 @@ installer_download_entries:
 
 archive_download_entries:
   - title: v1.0.0
-    url: assets/downloads/archive/Recepter1.0.0.tar.gz
+    url: https://github.com/Vjaby/Recepter/releases/download/v1.0.0/Recepter1.0.0.tar.gz
   - title: v0.2.1
     url: False
   - title: v0.2.0
