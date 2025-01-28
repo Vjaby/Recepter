@@ -2,7 +2,7 @@ title: Recepter
 url: https://vjaby.github.io # root address of the site
 baseurl: /Recepter # "Serve the website from the given base URL (the path between web-server or domain root and your landing page)." from https://jekyllrb.com/docs/configuration/options/ idk what it means but I think this is correct
 description: > # description of the site (multiple lines allowed)
-  Recepter is designed to help you write down your recipes in a streamlined manner and not get in the way with useless fluff. 
+  Recepter is a desktop app designed to help you write down your recipes in a streamlined manner and not get in the way with useless fluff.
 
 permalink: /:slug
 
@@ -20,7 +20,7 @@ theme_config:
   show_blog: true # show blog posts added in _posts
   show_reading_time: true # show number of words and reading time in the blog posts
   show_tags: true # show tags in a blog posts
-  
+
   # options for "home" page
   home:
     title_blog: Blog
