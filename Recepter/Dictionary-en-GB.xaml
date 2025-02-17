@@ -17,4 +17,5 @@
     <System:String x:Key="WantToSave">Do you want to save this recipe?</System:String>
     <System:String x:Key="UnsavedChanges">UNSAVED CHANGES</System:String>
     <System:String x:Key="FileTypeError">This file type cannot be opened</System:String>
+    <System:String x:Key="SaveError">An error has occurred while Recepter was saving</System:String>
 </ResourceDictionary>

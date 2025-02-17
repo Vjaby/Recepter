@@ -11,6 +11,7 @@ using Microsoft.Win32;
 using System.Windows.Controls.Primitives;
 using System.Globalization;
 using System.ComponentModel;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace Recepter {
     /// <summary>
@@ -103,40 +104,6 @@ namespace Recepter {
         // Save, open, new file
         #region File Buttons
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e) {
-            /*
-            if you opend or "save as-ed", made some changes and now want to "save", it should just save (duh)
-            if you click on "save" and you're NOT working on an already existing recipe, it should do "save as"
-
-            if SavedPath is empty -> save as
-            else check if SavedPath exists if yes -> save
-                                           if not -> save as
-            */
-            if (File.Exists(SavedPath) && NameTextBox.Text == System.IO.Path.GetFileName(SavedPath).Replace(".rcpt", ""))
-            {
-                Stream stream = File.Open(SavedPath, FileMode.Create);
-
-                // this check maybe dosn't need to happen since we already checked File.Exists
-                if (stream != null) {
-                    Recipe recipe = new Recipe() {
-                        Ingredients = Ingredients.ToList(), // oh boy
-                        Steps = Steps.ToList(),
-                        Notes = Notes.ToList()
-                    };
-                    XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
-
-                    serializer.Serialize(stream, recipe);
-                    stream.Close();
-
-                    SavedRecipe = recipe;
-                }
-            }
-            else
-            {
-                SaveAsButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent)); //click on the save as button
-            }
-        }
-
 
         private void OpenButton_Click(object sender, RoutedEventArgs e) {
             // I took this and did my best https://learn.microsoft.com/cs-cz/dotnet/api/system.windows.forms.savefiledialog?view=windowsdesktop-8.0
@@ -174,6 +141,40 @@ namespace Recepter {
         }
 
 
+        /// <summary>
+        /// If you opend or "save as-ed", made some changes and now want to "save", simply save.
+        /// If you click on "save" and you're NOT working on an already existing recipe, save as.
+        /// </summary>
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            /*
+            if SavedPath is empty -> save as
+            else check if SavedPath exists if yes -> save
+                                           if not -> save as
+            */
+            if (File.Exists(SavedPath) && NameTextBox.Text == System.IO.Path.GetFileName(SavedPath).Replace(".rcpt", ""))
+            {
+                Stream stream = File.Open(SavedPath, FileMode.Create);
+
+                // this check maybe dosn't need to happen since we already checked File.Exists
+                if (stream == null)
+                {
+                    MessageBox.Show(FindResource("SaveError").ToString(),
+                                "",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                    return;
+                }
+
+                SaveFileMethod(stream);
+            }
+            else
+            {
+                SaveAsButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent)); //click on the save as button
+            }
+        }
+
+
         private void SaveAsButton_Click(object sender, RoutedEventArgs e) {
             // I took this and did my best https://learn.microsoft.com/cs-cz/dotnet/api/system.windows.forms.savefiledialog?view=windowsdesktop-8.0
             Stream stream;
@@ -182,23 +183,23 @@ namespace Recepter {
                 FileName = NameTextBox.Text
             };
 
-            if ((bool)saveFileDialog.ShowDialog()) {
-                if ((stream = saveFileDialog.OpenFile()) != null) {
-                    Recipe recipe = new Recipe() {
-                        Ingredients = Ingredients.ToList(), // oh boy
-                        Steps = Steps.ToList(),
-                        Notes = Notes.ToList()
-                    };
-                    XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
-
-                    serializer.Serialize(stream, recipe);
-                    stream.Close();
-
-                    SavedRecipe = recipe;
-                    NameTextBox.Text = (saveFileDialog.SafeFileName).Replace(".rcpt", "");
-                    SavedPath = saveFileDialog.FileName;
-                }
+            if (!(bool)saveFileDialog.ShowDialog()) {
+                return;
             }
+
+            if ((stream = saveFileDialog.OpenFile()) == null) {
+                MessageBox.Show(FindResource("SaveError").ToString(),
+                                "",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                return;
+            }
+
+            SaveFileMethod(stream);
+
+            NameTextBox.Text = (saveFileDialog.SafeFileName).Replace(".rcpt", "");
+            SavedPath = saveFileDialog.FileName;
+
         }
 
         #endregion
@@ -418,6 +419,23 @@ namespace Recepter {
 
             ResetItemsControl();
             st.Close();
+        }
+
+
+        private void SaveFileMethod(Stream st)
+        {
+            Recipe recipe = new Recipe()
+            {
+                Ingredients = Ingredients.ToList(), // oh boy
+                Steps = Steps.ToList(),
+                Notes = Notes.ToList()
+            };
+            XmlSerializer serializer = new XmlSerializer(typeof(Recipe));
+
+            serializer.Serialize(st, recipe);
+            st.Close();
+
+            SavedRecipe = recipe;
         }
 
 

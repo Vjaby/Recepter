@@ -17,4 +17,5 @@
     <System:String x:Key="WantToSave">Möchten Sie dieses Rezept speichern?</System:String>
     <System:String x:Key="UnsavedChanges">NICHT GESPEICHERT</System:String>
     <System:String x:Key="FileTypeError">Dieser Dateityp kann nicht geöffnet werden</System:String>
+    <System:String x:Key="SaveError">Beim Speichern von Recepter ist ein Fehler aufgetreten</System:String>
 </ResourceDictionary>

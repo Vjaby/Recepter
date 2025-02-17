@@ -17,4 +17,5 @@
     <System:String x:Key="WantToSave">Chcete tento recept uložit?</System:String>
     <System:String x:Key="UnsavedChanges">NEULOŽENÉ ZMĚNY</System:String>
     <System:String x:Key="FileTypeError">Tento typ souboru nelze otevřít</System:String>
+    <System:String x:Key="SaveError">Při ukládání narazil Recepter na chybu</System:String>
 </ResourceDictionary>
