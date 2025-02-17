@@ -273,15 +273,33 @@ namespace Recepter {
         }
 
 
-         /*
-         chcecks for unsaved changes
-         if the curent recipe is the same as the last "SavedRecipe" -> false
-         if not -> ask "wanna save?" -> yes -> save -> false
-                                     -> no -> false
-                                     -> cancel -> true
-         false is like saying "go ahead"
-         true is like saying "stop! I still have work to do"
-         */
+        /// <summary>
+        ///     Chcecks for unsaved changes.
+        ///     False is like saying "go ahead".
+        ///     True is like saying "Stop! I still have work to do".
+        /// </summary>
+        /// <returns>
+        ///     <list type="bullet">
+        ///         <item>
+        ///         False if the curent recipe is the same as the last "SavedRecipe"
+        ///         </item>
+        ///         <item>
+        ///         if it's not -> ask "wanna save?"
+        ///         </item>
+        ///         
+        ///         <list type="bullet">
+        ///             <item>
+        ///             False if the user saves
+        ///             </item>
+        ///             <item>
+        ///             False if the user doesn't want to save
+        ///             </item>
+        ///             <item>
+        ///             True if the user wants to cancle
+        ///             </item>
+        ///         </list>
+        ///     </list>
+        /// </returns>
         private bool IsUnsaved() {
             string recipeString;
             string savedRecipeString;
