@@ -15,7 +15,7 @@ Writing down my recipes on paper didn't allow for easy changes, so I wanted some
 2. Archive -> Unzip all the files into a directory you want then launch "Recepter.exe".
 
 
-### Web site:
+### Website:
 
 https://vjaby.github.io/Recepter/
 
@@ -46,7 +46,7 @@ Zapisování mých receptů na papír neumožňovalo snadné změny, takže jsem
 2. Archive -> Rozbalte všechny soubory do požadovaného adresáře a spusťte "Recepter.exe".
 
 
-### Web site:
+### Webové stránky:
 
 https://vjaby.github.io/Recepter/
 
