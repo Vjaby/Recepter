@@ -10,10 +10,21 @@
     <System:String x:Key="SaveButtonContent">&#160;&#160;&#160;&#160;Save&#160;&#160;&#160;&#160;</System:String>
     <System:String x:Key="SaveAsButtonContent">&#160;&#160;&#160;&#160;Save As...&#160;&#160;&#160;&#160;</System:String>
     <System:String x:Key="OpenButtonContent">&#160;&#160;&#160;&#160;Open&#160;&#160;&#160;&#160;</System:String>
+    
+    <System:String x:Key="NewButtonTT">CTRL+N</System:String>
+    <System:String x:Key="SaveButtonTT">CTRL+S</System:String>
+    <System:String x:Key="SaveAsButtonTT">CTRL+SHIFT+S</System:String>
+    <System:String x:Key="OpenButtonTT">CTRL+O</System:String>
+
+    <System:String x:Key="MinButtonTT">Minimize</System:String>
+    <System:String x:Key="MaxAsButtonTT">Maximize</System:String>
+    <System:String x:Key="CloseButtonTT">Close application</System:String>
+
     <System:String x:Key="AddNewIngrButton">Add New Ingredient</System:String>
     <System:String x:Key="AddNewStepButton">Add New Step</System:String>
     <System:String x:Key="AddNewNoteButton">Add New Note</System:String>
     <System:String x:Key="NewRecipe">New Recipe</System:String>
+    
     <System:String x:Key="WantToSave">Do you want to save this recipe?</System:String>
     <System:String x:Key="UnsavedChanges">UNSAVED CHANGES</System:String>
     <System:String x:Key="FileTypeError">This file type cannot be opened</System:String>

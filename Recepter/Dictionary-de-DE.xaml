@@ -10,10 +10,21 @@
     <System:String x:Key="SaveButtonContent">&#160;&#160;&#160;&#160;Schpeichern&#160;&#160;&#160;&#160;</System:String>
     <System:String x:Key="SaveAsButtonContent">&#160;&#160;&#160;&#160;Speichern unter...&#160;&#160;&#160;&#160;</System:String>
     <System:String x:Key="OpenButtonContent">&#160;&#160;&#160;&#160;Öffnen&#160;&#160;&#160;&#160;</System:String>
+
+    <System:String x:Key="NewButtonTT">CTRL+N</System:String>
+    <System:String x:Key="SaveButtonTT">CTRL+S</System:String>
+    <System:String x:Key="SaveAsButtonTT">CTRL+SHIFT+S</System:String>
+    <System:String x:Key="OpenButtonTT">CTRL+O</System:String>
+
+    <System:String x:Key="MinButtonTT">Minimieren</System:String>
+    <System:String x:Key="MaxAsButtonTT">Maximieren</System:String>
+    <System:String x:Key="CloseButtonTT">Anwendung schließen</System:String>
+
     <System:String x:Key="AddNewIngrButton">Neue Zutat</System:String>
     <System:String x:Key="AddNewStepButton">Neuer Schritt</System:String>
     <System:String x:Key="AddNewNoteButton">Neue Notiz</System:String>
     <System:String x:Key="NewRecipe">Neues Rezept</System:String>
+    
     <System:String x:Key="WantToSave">Möchten Sie dieses Rezept speichern?</System:String>
     <System:String x:Key="UnsavedChanges">NICHT GESPEICHERT</System:String>
     <System:String x:Key="FileTypeError">Dieser Dateityp kann nicht geöffnet werden</System:String>

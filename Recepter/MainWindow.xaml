@@ -225,13 +225,13 @@
             <!--Open, save... buttons-->
             <StackPanel Grid.Column="0" Orientation="Horizontal">
                 <Button x:Name="NewButton" Content="{DynamicResource NewButtonContent}" Click="NewButton_Click"
-                        Style="{StaticResource FileButtonStyle}"/>
+                        Style="{StaticResource FileButtonStyle}" ToolTip="{DynamicResource NewButtonTT}"/>
                 <Button x:Name="SaveButton" Content="{DynamicResource SaveButtonContent}" Click="SaveButton_Click"
-                        Style="{StaticResource FileButtonStyle}"/>
+                        Style="{StaticResource FileButtonStyle}" ToolTip="{DynamicResource SaveButtonTT}"/>
                 <Button x:Name="SaveAsButton" Content="{DynamicResource SaveAsButtonContent}" Click="SaveAsButton_Click"
-                        Style="{StaticResource FileButtonStyle}"/>
+                        Style="{StaticResource FileButtonStyle}" ToolTip="{DynamicResource SaveAsButtonTT}"/>
                 <Button x:Name="OpenButton" Content="{DynamicResource OpenButtonContent}" Click="OpenButton_Click"
-                        Style="{StaticResource FileButtonStyle}"/>
+                        Style="{StaticResource FileButtonStyle}" ToolTip="{DynamicResource OpenButtonTT}"/>
             </StackPanel>
 
             <!--Language buttons-->
@@ -250,11 +250,11 @@
             <!--control buttons-->
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="MinButton" Content="_" Style="{StaticResource ControlButtonStyle}"
-                        Click="MinButton_Click"/>
+                        Click="MinButton_Click" ToolTip="{DynamicResource MinButtonTT}"/>
                 <Button x:Name="MaxButton" Content="^" Style="{StaticResource ControlButtonStyle}"
-                        Click="MaxButton_Click"/>
+                        Click="MaxButton_Click" ToolTip="{DynamicResource MaxButtonTT}"/>
                 <Button x:Name="CloseButton" Content="X" Style="{StaticResource ControlButtonStyle}"
-                        Click="CloseButton_Click"/>
+                        Click="CloseButton_Click" ToolTip="{DynamicResource CloseButtonTT}"/>
             </StackPanel>
         </Grid>
 

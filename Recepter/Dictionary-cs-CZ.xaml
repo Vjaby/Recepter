@@ -10,10 +10,21 @@
     <System:String x:Key="SaveButtonContent">&#160;&#160;&#160;&#160;Uložit&#160;&#160;&#160;&#160;</System:String>
     <System:String x:Key="SaveAsButtonContent">&#160;&#160;&#160;&#160;Uložit jako...&#160;&#160;&#160;&#160;</System:String>
     <System:String x:Key="OpenButtonContent">&#160;&#160;&#160;&#160;Otevřít&#160;&#160;&#160;&#160;</System:String>
+
+    <System:String x:Key="NewButtonTT">CTRL+N</System:String>
+    <System:String x:Key="SaveButtonTT">CTRL+S</System:String>
+    <System:String x:Key="SaveAsButtonTT">CTRL+SHIFT+S</System:String>
+    <System:String x:Key="OpenButtonTT">CTRL+O</System:String>
+
+    <System:String x:Key="MinButtonTT">Minimalizovat</System:String>
+    <System:String x:Key="MaxAsButtonTT">Maximalizovat</System:String>
+    <System:String x:Key="CloseButtonTT">Zavřít aplikaci</System:String>
+
     <System:String x:Key="AddNewIngrButton">Přidat novou surovinu</System:String>
     <System:String x:Key="AddNewStepButton">Přidat nový krok</System:String>
     <System:String x:Key="AddNewNoteButton">Přidat novou poznámku</System:String>
     <System:String x:Key="NewRecipe">Nový Recept</System:String>
+    
     <System:String x:Key="WantToSave">Chcete tento recept uložit?</System:String>
     <System:String x:Key="UnsavedChanges">NEULOŽENÉ ZMĚNY</System:String>
     <System:String x:Key="FileTypeError">Tento typ souboru nelze otevřít</System:String>
