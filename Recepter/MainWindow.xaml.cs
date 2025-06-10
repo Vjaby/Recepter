@@ -30,6 +30,8 @@ namespace Recepter {
 
             ChangeLang(Properties.Settings.Default.lang);
 
+            HotkeySetup();
+
             IngredientsItemsControl.ItemsSource = Ingredients;
             StepsItemsControl.ItemsSource = Steps;
             NotesItemsControl.ItemsSource = Notes;
@@ -260,6 +262,32 @@ namespace Recepter {
 
         // Helpers and such
         #region Other methods
+
+        private void HotkeySetup() {
+            // https://codesamplez.com/development/wpf-hotkeys-c-sharp
+            RoutedCommand command;
+
+            // CTRL+N
+            command = new RoutedCommand();
+            command.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(command, NewButton_Click));
+
+            // CTRL+S
+            command = new RoutedCommand();
+            command.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(command, SaveButton_Click));
+
+            // CTRL+Shift+S
+            command = new RoutedCommand();
+            command.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control | ModifierKeys.Shift));
+            CommandBindings.Add(new CommandBinding(command, SaveAsButton_Click));
+
+            // CTRL+O
+            command = new RoutedCommand();
+            command.InputGestures.Add(new KeyGesture(Key.O, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(command, OpenButton_Click));
+        }
+
 
         //Makes sure the ItemsControls are showing what their supposed to
         //especialy after adding or deleting
